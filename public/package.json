@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "progressbar.js": "^1.1.0",
+    "tui-pagination": "^3.4.1",
+    "vanilla-masker": "^1.2.0"
+  }
+}

@@ -1,27 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { NestFastifyApplication, FastifyAdapter } from '@nestjs/platform-fastify';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import hbs = require('hbs');
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
+  const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
-    new FastifyAdapter()
   );
 
-  app.useStaticAssets({
-    root: join(__dirname, '..', 'public'),
-    prefix: '/public/',
-  });
-  app.setViewEngine({
-    engine: {
-      handlebars: require('handlebars'),
-    },
-    templates: join(__dirname, '..', 'views'),
-  });
-  //app.useStaticAssets(join(__dirname, '..', 'public'));
-  // app.set('views', join(__dirname))
-  // app.set('view engine', 'hbs')
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setViewEngine('hbs');
+  hbs.registerPartials(join(__dirname, '..', 'views', 'partials'));
 
   await app.listen(process.env.PORT);
   console.log(`Application is running on: ${await app.getUrl()}`);

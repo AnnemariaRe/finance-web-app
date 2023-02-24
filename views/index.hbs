@@ -1,10 +1,206 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>App</title>
-  </head>
-  <body>
-    {{ message }}
-  </body>
-</html>
+<section class="first-block">
+  <div class="heading">
+      <h1>WalletKeeper</h1>
+  </div>
+  <div class="buttons">
+      <a class="open-button" onclick="document.getElementById('id01').style.display='block'">
+          <i class="fa fa-minus"></i>
+          <span class="btn-text">Снять</span>
+      </a>
+
+      <a class="open-button" onclick="document.getElementById('id02').style.display='block'">
+          <i class="fa fa-plus"></i>
+          <span class="btn-text">Положить</span>
+      </a>
+
+      <div id="id01" class="modal">
+          <form class="modal-content animate" onsubmit="onFormSubmit1()">
+              <div class="container">
+                  <label for="expense_amount"><b>Сумма</b></label>
+                  <input type="text" placeholder="Введите потраченную сумму" id="expense_amount" required>
+
+                  <label for="expense_category"><b>Категория</b></label>
+                  <select id="expense_category">
+                      <option selected>Продукты</option>
+                      <option>Рестораны</option>
+                      <option>Транспорт</option>
+                      <option>Жилье</option>
+                      <option>Медицина</option>
+                      <option>Путешестия</option>
+                  </select>
+
+                  <label for="account"><b>Счет списания</b></label>
+                  <select id="account1">
+
+                  </select>
+
+                  <label for="date"><b>Дата транзакции</b></label><br>
+                  <input type="date" id="today1">
+                  <script>
+                      document.getElementById('today1').valueAsDate = new Date();
+                  </script> <br>
+
+                  <button class="submit" type="submit">Отправить</button>
+                  <select id="check1">
+                      <option selected>-</option>
+                  </select>
+              </div>
+          </form>
+      </div>
+
+      <div id="id02" class="modal">
+          <form class="modal-content animate" onsubmit="onFormSubmit2()">
+              <div class="container">
+                  <label for="income_amount"><b>Сумма</b></label>
+                  <input type="text" placeholder="Введите полученную сумму" id="income_amount" required>
+
+                  <label for="income_category"><b>Категория</b></label>
+                  <select id="income_category">
+                      <option selected>Зарплата</option>
+                      <option>Стипендия</option>
+                      <option>Подработка</option>
+                      <option>Подарки</option>
+                  </select>
+
+                  <label for="account"><b>Счет зачисления</b></label>
+                  <select id="account2">
+
+                  </select>
+
+                  <label for="date"><b>Дата транзакции</b></label><br>
+                  <input type="date" id="today2">
+                  <script>
+                      document.getElementById('today2').valueAsDate = new Date();
+                  </script> <br>
+
+                  <button class="submit" type="submit">Отправить</button>
+                  <select id="check2">
+                      <option selected>+</option>
+                  </select>
+              </div>
+          </form>
+      </div>
+
+      <script>
+          var modal1 = document.getElementById('id01');
+          var modal2 = document.getElementById('id02');
+
+          window.onclick = function (event) {
+              if (event.target == modal1) {
+                  modal1.style.display = "none";
+              }
+              if (event.target == modal2) {
+                  modal2.style.display = "none";
+              }
+          }
+      </script>
+  </div>
+  </section>
+
+  <section class="second-block">
+  <section class="balance-all">
+      <div class="balance-item">
+          <h4>Всего средств: 124,000 ₽</h4>
+      </div>
+      <div class="balance-item">
+          <h4>Доступно сейчас: 68,000 ₽</h4>
+      </div>
+      <div class="balance-item">
+          <h4>Сбережения: 56,000 ₽</h4>
+      </div>
+  </section>
+
+  <section class="graph-expense">
+      <h3>Траты последние 10 дней</h3>
+      <div style="max-width:650px"><canvas id="expenses_chart"></canvas></div>
+
+      <script>
+          const submits = { ...localStorage };
+          var data = Array(31).fill(0);
+          var colors = [];
+          var xValues = [];
+
+          var now = new Date();
+          var today = String(now.getDate()).padStart(2, '0');
+          var month = String(now.getMonth() + 1).padStart(2, '0');
+
+          if (today > 10) {
+              var start = today - 9;
+              var start2 = today - 9;
+          } else {
+              var start = 1;
+              var start2 = 1;
+          }
+
+          for (let i = 0; i < 10; i++) {
+              xValues[i] = start;
+              start++;
+              colors[i] = "#C5CEB6";
+          }
+
+          for (let submit in submits) {
+              if (submit.endsWith("acc")) { continue; }
+              submit_info = JSON.parse(localStorage[submit]);
+              if (submit_info.check == "+") { continue; }
+
+              var day = Number(submit_info.date.split('-')[2]);
+              if (submit_info.date.split('-')[1] == month && day > today - 9) {
+                  data[day] += Number(submit_info.amount);
+              }
+          }
+
+          new Chart("expenses_chart", {
+              type: "bar",
+              data: {
+                  labels: xValues,
+                  datasets: [{
+                      backgroundColor: colors,
+                      data: data.slice(start2, start2 + 10)
+                  }]
+              },
+              options: {
+                  legend: { display: false },
+              }
+          });
+      </script>
+  </section>
+  </section>
+
+  <section class="third-block">
+  <section class="history-list">
+      <table id="history">
+          <thead>
+              <tr>
+                  <th>Категория</th>
+                  <th>Количество</th>
+                  <th>Счет</th>
+                  <th>Дата</th>
+              </tr>
+          </thead>
+          <tbody id="main">
+          </tbody>
+      </table>
+  </section>
+
+  <section class="month-balance-all">
+      <div class="exchange">
+          <table class="exchange-table" id="exchange">
+              <tr>
+                  <th>Валюта</th>
+                  <th>Курс</th>
+              </tr>
+              <tr>
+                  <td>RUB</td>
+                  <td><b>1</b></td>
+              </tr>
+          </table>
+      </div>
+
+      <div class="month-balance-item">
+          <h4>расход за месяц: 31000 ₽</h4>
+      </div>
+      <div class="month-balance-item">
+          <h4>доход за месяц: 50000 ₽</h4>
+      </div>
+  </section>
+</section>

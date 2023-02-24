@@ -5,12 +5,19 @@ export class AppController {
   @Get()
   @Render('index')
   root() {
-    return { message: 'Hello world!' };
+    return { message: 'Home page' };
   }
 
   @Get('/wallet')
   @Render('wallet')
   wallet() {
     return { message: 'Wallet page' };
+  }
+
+
+  @Get('/history')
+  @Render('history')
+  history() {
+    return { message: 'History page' };
   }
 }

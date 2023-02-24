@@ -4,7 +4,7 @@ import { Controller, Get, Render } from '@nestjs/common';
 export class AppController {
   @Get()
   @Render('index')
-  root() {
+  main() {
     return { message: 'Home page' };
   }
 
@@ -13,7 +13,6 @@ export class AppController {
   wallet() {
     return { message: 'Wallet page' };
   }
-
 
   @Get('/history')
   @Render('history')

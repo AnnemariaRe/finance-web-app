@@ -1,13 +1,3 @@
-@media screen and (min-width: 1630px) {
-    .content {
-        width: 1400px;
-    }
-
-    .accounts {
-        margin-left: 0px;
-    }
-}
-
 @media screen and (max-width: 1630px) {
     .content {
         padding-left: 0px;
@@ -20,20 +10,12 @@
 }
 
 @media screen and (max-width: 1570px) {
-    .content {
-        width: 1300px;
-    }
-
     .exchange-table td {
         padding: 10px 57px;
     }
 }
 
 @media screen and (max-width: 1490px) {
-    .content {
-        width: 1200px;
-    }
-
     .open-button {
         margin: 10px 10px;
     }
@@ -48,10 +30,6 @@
 }
 
 @media screen and (max-width: 1390px) {
-    .content {
-        width: 1150px;
-    }
-
     .open-button {
         margin: 10px 30px;
         margin-left: -10px;
@@ -67,16 +45,12 @@
 }
 
 @media screen and (max-width: 1330px) {
-    .content {
-        width: 1100px;
-    }
-
     .open-button {
         margin: 10px 10px;
     }
 
     .buttons {
-        margin-right: -80px;
+        margin-right: 5%;
     }
 
     .exchange-table td {
@@ -89,24 +63,16 @@
 }
 
 @media screen and (max-width: 1300px) {
-    .content {
-        width: 1000px;
-    }
-
     .open-button {
         margin: 10px 10px;
     }
 
     .buttons {
-        margin-right: -50px;
+        width: 40%;
     }
 
     .exchange-table td {
         padding: 10px 44px;
-    }
-
-    .exchange {
-        width: 109%;
     }
 
     .graph-expense {
@@ -114,22 +80,18 @@
     }
 
     .month-balance-item {
-        width: 65%;
+        width: 50%;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .content {
-        width: 900px;
-    }
-
     .open-button {
         margin: 10px 10px;
     }
 
     .buttons {
         margin-right: 0px;
-        width: 40%;
+        width: 42%;
     }
 
     .balance-all {
@@ -148,8 +110,8 @@
         margin-top: -280px;
     }
 
-    .exchange-table td {
-        padding: 10px 38px;
+    .month-balance-all {
+        padding: 10px 0px;
     }
 
     table td, table th {
@@ -163,14 +125,6 @@
 }
 
 @media screen and (max-width: 1100px) {
-    .content {
-        width: 800px;
-    }
-
-    .buttons {
-        margin-right: 10px;
-    }
-
     .open-button, button {
         padding: 10px 10px;
         margin: 10px 10px;
@@ -225,7 +179,7 @@
     }
 
     .history-list {
-        width: 100%;
+        width: 90%;
     }
 
     .graphs {
@@ -308,10 +262,6 @@
 @media screen and (max-width: 930px) { 
     main {
         padding-left: 80px;
-    }
-
-    .content {
-        width: 95%;
     }
 
     .buttons {
@@ -441,290 +391,5 @@
 @media screen and (min-width: 660px) { 
     .accounts-body table td .fa-ruble, .accounts-body table td .fa-euro, .accounts-body table td .fa-dollar  {
         display: none;
-    }
-}
-
-@media screen and (max-width: 660px) { 
-    main {
-        padding-left: 60px;
-    }
-    
-    .history-list table {
-        font-size: 12px;
-    }
-
-    .history-list {
-        width: 90%;
-        margin-left: 30px;
-    }
-
-    table td, table th {
-        padding: 20px 10px;
-    }
-
-    .icon {
-        font-size: 24px;
-    }
-
-    .menu-bar {
-        width: 70px;
-    }
-
-    .open-button {
-        font-size: 15px;
-        margin: 20px 2%;
-    }
-
-    .buttons {
-        margin-right: -20px;
-    }
-
-    .balance-all {
-        margin-left: 0;
-    }
-
-    .graph-expense h3 {
-        margin-right: 0;
-        font-size: 18px;
-    }
-    
-    .month-balance-item {
-        width: 70%;
-    }
-
-    .exchange-table td {
-        padding: 10px 50px;
-    }
-
-    .accounts-body table td .currency  {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 582px) { 
-    .buttons .btn-text {
-        display: none;
-    }
-
-    .buttons {
-        width: 40%;
-    }
-
-    .open-button {
-        width: 10%;
-        margin: 20px 4%;
-        padding: 10px 20px;
-    }
-
-    .balance-all {
-        margin-left: -10px;
-    }
-
-    .balance-item {
-        padding: 5%;
-    }
-
-    .graph-expense {
-        margin-right: 10px;
-        margin-top: 25px;
-    }
-
-    .month-balance-item {
-        width: 80%;
-        padding: 10px 10px;
-    }
-
-    .exchange {
-        width: 90%;
-    }
-
-    .exchange-table td {
-        padding: 10px 40px;
-    }
-
-    .accounts-body table td {
-        padding: 20px 10px;
-    }
-
-    .accounts-body table td span {
-        display: none;
-    }
-
-    .history-list {
-        margin-left: 20px;
-    }
-}
-
-@media screen and (max-width: 500px) { 
-
-    main {
-        padding-left: 50px;
-    }
-
-    .first-block {
-        margin-left: 20px;
-    }
-
-    .graph-expense h3 {
-        margin-right: 0;
-        font-size: 15px;
-    }
-
-    .balance-all {
-        margin-left: -10px;
-    }
-
-}
-
-@media screen and (max-width: 495px) { 
-    .buttons {
-        width: 40%;
-        margin-right: -40px;
-    }
-
-    .open-button {
-        width: 8%;
-        margin: 20px 2%;
-        padding: 8px 10px;
-    }
-
-    .month-balance-all {
-        width: 80%;
-        margin-left: 10px;
-    }
-
-    .exchange {
-        width: 80%;
-        margin-left: 20px;
-    }
-
-}
-
-@media screen and (max-width: 470px) { 
-    main {
-        padding-left: 35px;
-    }
-
-    .heading {
-        font-size: 20px;
-        margin-left: 3%;
-    }
-
-    .balance-item {
-        font-size: 20px;
-        padding: 5px;
-    }
-
-    .month-balance-item {
-        width: 90%;
-        font-size: 16px;
-        padding: 10px 3px;
-    }
-
-    .month-balance-all {
-        margin-left: 15px;
-    }
-
-    .exhange {
-        margin-left: -10px;
-    }
-
-    .exchange-table td {
-        padding: 10px 30px;
-    }
-
-    .icon {
-        font-size: 20px
-    }
-
-    .menu-bar {
-        width: 50px;
-    }
-
-    .menu-bar a {
-        padding: 25px 15px;
-    }
-
-    .history-list {
-        overflow-x: auto;  
-    }
-}
-
-@media screen and (max-width: 434px) {
-    .accounts-header h3 {
-        font-size: 20px;  
-        margin-left: 0;
-    }
-
-    .accounts-header a {
-        font-size: 15px;
-        margin-left: 0;
-    }
-
-    .accounts-body {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 410px) { 
-    .first-block {
-        height: 100px;
-    }
-    
-    .heading {
-        width: 90%;
-        text-align: center;
-        margin-top: -7px;
-    }
-    
-    .buttons {
-        margin-top: -5px;
-        width: 80%;
-        margin-left: 40px;
-        margin-right: 0px;
-    }
-
-    .open-button {
-        width: 40%;
-        margin: 10px 10px;
-        padding: 8px 20px;
-    }
-
-    .month-balance-item {
-        width: 90%;
-        font-size: 18px;
-        padding: 10px 3px;
-    }
-
-    .exchange {
-        margin-top: 0;
-    }
-
-    .exchange-table td {
-        padding: 10px 20px;
-    }
-
-    .graphs {
-        display: none;
-    }
-
-    .content {
-        overflow-x: auto;
-    }
-}
-
-@media screen and (max-width: 375px) {   
-    .buttons {
-        width: 90%;
-    }
-
-    .month-balance-item {
-        width: 80%;
-        font-size: 16px;
-        padding: 10px 3px;
-    }
-
-    .month-balance-all {
-        margin-left: 20px;
     }
 }

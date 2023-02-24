@@ -19,10 +19,10 @@
 }
 
 .buttons {
-    width: 40%;
+    width: 35%;
     float: right;
     margin-top: -65px;
-    margin-right: -130px;
+    margin-right: -5%;
 }
 
 .open-button:hover {

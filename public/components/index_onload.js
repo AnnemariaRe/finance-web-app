@@ -28,7 +28,6 @@ window.onload = function () {
     }, 1000))
     .catch(error => { 
         console.error(error);
-        document.getElementById("exchange").innerHTML += `<h3>Ошибка :с</h3>`;
     });
 
     $(document).ready( function () {

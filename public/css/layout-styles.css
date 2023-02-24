@@ -1,12 +1,13 @@
 html {
     box-sizing: border-box;
     background-color: #FCFCFC;
-    font-family: sans-serif;
+    font-family: 'Montserrat';
 }
 
 main {
-    padding-left: 190px;
+    padding-left: 200px;
     padding-right: 25px;
+    width: auto;
     height: auto;
 }
 
@@ -15,7 +16,6 @@ div {
 }
 
 .content {
-    width: 1400px;
     padding-left: 50px;
     padding-right: 20px;
 }

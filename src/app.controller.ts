@@ -1,11 +1,15 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Req } from '@nestjs/common';
 
 @Controller()
 export class AppController {
   @Get()
   @Render('index')
-  main() {
-    return { message: 'Home page' };
+  main(@Req() req) {
+    if (req.user) {
+      return { message: 'Authorized user' };
+    } else {
+      return { message: 'Unauthorized user' }
+    }
   }
 
   @Get('/wallet')

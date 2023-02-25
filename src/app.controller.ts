@@ -1,12 +1,14 @@
-import { Controller, Get, Render, Req } from '@nestjs/common';
+import { Controller, Get, Render, Req, Res, UseInterceptors } from '@nestjs/common';
+import { ResponseTimeInterceptor } from './response-time.interceptor';
 
+@UseInterceptors(new ResponseTimeInterceptor)
 @Controller()
 export class AppController {
   @Get()
   @Render('index')
-  main(@Req() req) {
+  main(@Req() req, @Res() res: Response) {
     if (req.user) {
-      return { message: 'Authorized user' };
+      return { message: 'Authorized user'};
     } else {
       return { message: 'Unauthorized user' }
     }

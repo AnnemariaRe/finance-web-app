@@ -10,7 +10,7 @@ export class AppController {
     if (req.user) {
       return {
         message: 'Main page',
-        showProfilebutton: true
+        showLogoutbutton: true
       };
     } else {
       return {

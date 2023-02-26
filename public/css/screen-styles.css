@@ -244,10 +244,16 @@
         font-size: 25px;
         color: #16241e;
         display: block;
+        text-align: center;
     }
 
     .menu-nav .title {
         display: none;
+    }
+
+    .auth-button {
+        width: 40px;
+        bottom: 10px;
     }
 
     footer {

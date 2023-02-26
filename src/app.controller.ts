@@ -6,11 +6,17 @@ import { ResponseTimeInterceptor } from './response-time.interceptor';
 export class AppController {
   @Get()
   @Render('index')
-  main(@Req() req, @Res() res: Response) {
+  main(@Req() req) {
     if (req.user) {
-      return { message: 'Authorized user'};
+      return {
+        message: 'Main page',
+        showProfilebutton: true
+      };
     } else {
-      return { message: 'Unauthorized user' }
+      return {
+        message: 'Main page',
+        showLoginButton: true
+      }
     }
   }
 

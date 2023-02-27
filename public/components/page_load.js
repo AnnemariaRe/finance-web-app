@@ -7,7 +7,7 @@ xhr.onload = function() {
   } else {
     const domLoadedTime = performance.getEntriesByType('navigation')[0].responseStart - performance.getEntriesByType('navigation')[0].requestStart;
     const renderTimeElement = document.getElementById("loading");
-    console.log("Total load time: " + domLoadedTime + " ms (client) " + serverProcessingTime + " ms (server)");
+    renderTimeElement.innerHTML += ("Total load time: " + domLoadedTime + " ms (client) " + serverProcessingTime + " ms (server)");
   }
 };
 xhr.send();

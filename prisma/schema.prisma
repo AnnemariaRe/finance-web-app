@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  email        String   @unique
+  name         String?
+  password     String
+  role         Role     @default(USER)
+  accounts     Account[]
+}
+
+model Account {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  author       User?    @relation(fields: [authorId], references: [id])
+  authorId     Int?
+  title        String
+  balance      Decimal
+  isActive    Boolean
+  currency     String
+  accountType  AccountType   @default(current)
+  transactions Transaction[]
+}
+
+model Transaction {
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime @default(now())
+  operationType    OperationType
+  amount           Decimal
+  category         Category
+  account          Account? @relation(fields: [accountId], references: [id])
+  accountId        Int
+  transactionDate  DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum AccountType {
+  current
+  savings
+  credit
+  deposit
+}
+
+enum OperationType {
+  expense
+  income
+}
+
+enum Category {
+  grocery
+  restaurants
+  transport
+  housing
+  medicine
+  travel
+}

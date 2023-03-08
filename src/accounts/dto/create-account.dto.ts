@@ -3,7 +3,7 @@ import { AccountType, Prisma } from "@prisma/client";
 
 export class CreateAccountDto {
     @ApiProperty()
-    authorId: number;
+    userId: number;
     @ApiProperty()
     title: string;
     @ApiProperty()

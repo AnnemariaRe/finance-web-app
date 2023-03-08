@@ -9,10 +9,10 @@ export class AccountsService {
   }
 
   create(createAccountDto: CreateAccountDto) {
-    const { authorId, title, balance, currency, accountType } = createAccountDto;
+    const { userId, title, balance, currency, accountType } = createAccountDto;
     return this.prisma.user.update({
       where: {
-        id: authorId,
+        id: userId,
       },
       data: {
         accounts: {
@@ -25,8 +25,8 @@ export class AccountsService {
     });
   }
 
-  findAllFromUser(authorId: number) {
-    return this.prisma.account.findMany({ where: { authorId } });
+  findAllFromUser(userId: number) {
+    return this.prisma.account.findMany({ where: { userId } });
   }
 
   findOne(id: number) {

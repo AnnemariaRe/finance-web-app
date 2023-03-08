@@ -7,7 +7,7 @@ export class AccountEntity implements Account {
     @ApiProperty()
     createdAt: Date;
     @ApiProperty()
-    authorId: number;
+    userId: number;
     @ApiProperty()
     title: string;
     @ApiProperty()

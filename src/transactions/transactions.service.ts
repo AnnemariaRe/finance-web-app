@@ -44,13 +44,13 @@ export class TransactionsService {
 
   findAllFromUserAccount(userId: number, accountId: number) {
     return this.prisma.transaction.findMany({
-      where: { accountId, account: { authorId: userId } },
+      where: { accountId, account: { userId: userId } },
     })
   }
 
   findAllFromUserWithOperationType(userId: number, operationType: OperationType) {
     return this.prisma.transaction.findMany({
-      where: { account: { authorId: userId }, operationType },
+      where: { account: { userId: userId }, operationType },
     })
   }
 

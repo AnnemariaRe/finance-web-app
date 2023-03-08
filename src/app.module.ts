@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PrismaService } from './prisma/prisma.service';
 import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { UsersModule } from './users/users.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 @Module({
   controllers: [AppController],
@@ -12,7 +13,7 @@ import { UsersModule } from './users/users.module';
       provide: APP_INTERCEPTOR,
       useClass: ResponseTimeInterceptor},
     PrismaService],
-  imports: [UsersModule],
+  imports: [UsersModule, AccountsModule],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

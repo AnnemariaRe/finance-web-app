@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { OperationType } from '@prisma/client';
+import { Category, OperationType } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
@@ -51,7 +51,13 @@ export class TransactionsService {
   findAllFromUserWithOperationType(userId: number, operationType: OperationType) {
     return this.prisma.transaction.findMany({
       where: { account: { userId: userId }, operationType },
-    })
+    });
+  }
+
+  findAllFromUserWithCategory(userId: number, category: Category) {
+    return this.prisma.transaction.findMany({
+      where: { account: { userId: userId }, category },
+    });
   }
 
   findOne(id: number) {

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
-import { OperationType } from '@prisma/client';
+import { Category, OperationType } from '@prisma/client';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TransactionEntity } from './entities/transaction.entity';
 
@@ -33,6 +33,12 @@ export class TransactionsController {
   @ApiOkResponse({ type: TransactionEntity, isArray: true })
   findAllFromUserWithOperationType(@Param('userId') userId: string, @Param('transactionType') transactionType: OperationType) {
     return this.transactionsService.findAllFromUserWithOperationType(+userId, transactionType);
+  }
+
+  @Get(':userId/:category')
+  @ApiOkResponse({ type: TransactionEntity, isArray: true })
+  findAllFromUserWithCategory(@Param('userId') userId: string, @Param('category') category: Category) {
+    return this.transactionsService.findAllFromUserWithCategory(+userId, category);
   }
 
   @Get(':id')

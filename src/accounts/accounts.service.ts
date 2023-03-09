@@ -10,7 +10,7 @@ export class AccountsService {
 
   create(createAccountDto: CreateAccountDto) {
     const { userId, title, balance, currency, accountType } = createAccountDto;
-    return this.prisma.user.update({
+    const user = this.prisma.user.update({
       where: {
         id: userId,
       },
@@ -23,6 +23,7 @@ export class AccountsService {
         accounts: { take: -1 }
       }
     });
+    return user.accounts[-1];
   }
 
   findAllFromUser(userId: number) {
@@ -30,7 +31,7 @@ export class AccountsService {
   }
 
   findOne(id: number) {
-    return this.prisma.user.findUnique({ where: { id } });
+    return this.prisma.account.findUnique({ where: { id } });
   }
 
   update(id: number, updateAccountDto: UpdateAccountDto) {

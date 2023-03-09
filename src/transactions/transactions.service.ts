@@ -11,7 +11,7 @@ export class TransactionsService {
 
   create(createTransactionDto: CreateTransactionDto) {
     const { accountId, operationType, amount, category, transactionDate } = createTransactionDto;
-    return this.prisma.account.update({
+    const account = this.prisma.account.update({
       where: {
         id: accountId,
       },
@@ -24,6 +24,7 @@ export class TransactionsService {
         transactions: { take: -1 }
       }
     });
+    return account.transactions[-1];
   }
 
   findAllFromUser(userId: number) {
@@ -61,7 +62,7 @@ export class TransactionsService {
   }
 
   findOne(id: number) {
-    return this.prisma.user.findUnique({ where: { id } });
+    return this.prisma.transaction.findUnique({ where: { id } });
   }
 
   update(id: number, updateTransactionDto: UpdateTransactionDto) {

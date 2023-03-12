@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Category, OperationType } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime';
+import Decimal from "decimal.js";
 import { CreateTransactionDto } from './create-transaction.dto';
 
 export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {

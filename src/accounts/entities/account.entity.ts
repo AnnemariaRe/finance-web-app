@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Account, AccountType, Prisma } from "@prisma/client";
+import Decimal from "decimal.js";
 
 export class AccountEntity implements Account {
     @ApiProperty()
@@ -11,7 +12,7 @@ export class AccountEntity implements Account {
     @ApiProperty()
     title: string;
     @ApiProperty()
-    balance: Prisma.Decimal;
+    balance: Decimal;
     @ApiProperty()
     isActive: boolean;
     @ApiProperty()

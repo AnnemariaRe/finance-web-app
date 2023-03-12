@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AccountType, Prisma } from "@prisma/client";
+import Decimal from "decimal.js";
 
 export class CreateAccountDto {
     @ApiProperty()
@@ -7,7 +8,7 @@ export class CreateAccountDto {
     @ApiProperty()
     title: string;
     @ApiProperty()
-    balance: Prisma.Decimal;
+    balance: Decimal;
     @ApiProperty()
     currency: string;
     @ApiProperty()

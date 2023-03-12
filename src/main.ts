@@ -11,14 +11,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
   );
-
-  app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
-  app.setViewEngine('hbs');
-  hbs.registerPartials(join(__dirname, '..', 'views', 'partials'));
-
-  app.useGlobalInterceptors(new ResponseTimeInterceptor());
-
   const config = new DocumentBuilder()
     .setTitle('WalletKeeper Web App')
     .setDescription('The API description')
@@ -31,7 +23,14 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app);
+
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setViewEngine('hbs');
+  hbs.registerPartials(join(__dirname, '..', 'views', 'partials'));
+
+  app.useGlobalInterceptors(new ResponseTimeInterceptor());
+
 
   await app.listen(process.env.PORT);
   console.log(`Application is running on: ${await app.getUrl()}`);

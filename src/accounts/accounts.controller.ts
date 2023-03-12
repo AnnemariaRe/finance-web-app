@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -10,33 +10,38 @@ import { AccountEntity } from './entities/account.entity';
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
+  @ApiOperation({summary: 'Create account'})
   @Post()
   @ApiCreatedResponse({ type: AccountEntity })
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountsService.create(createAccountDto);
+  async create(@Body() createAccountDto: CreateAccountDto) : Promise<AccountEntity> {
+    return await this.accountsService.create(createAccountDto);
   }
 
+  @ApiOperation({summary: 'Get all user accounts'})
   @Get(':userId')
   @ApiOkResponse({ type: AccountEntity, isArray: true })
-  findAllFromUser(@Param('userId') userId: string) {
+  async findAllFromUser(@Param('userId') userId: string) : Promise<AccountEntity[]> {
     return this.accountsService.findAllFromUser(+userId);
   }
 
+  @ApiOperation({summary: 'Get account'})
   @Get(':id')
   @ApiOkResponse({ type: AccountEntity})
-  findOne(@Param('id') id: string) {
-    return this.accountsService.findOne(+id);
+  async findOne(@Param('id') id: string) : Promise<AccountEntity> {
+    return await this.accountsService.findOne(+id);
   }
 
+  @ApiOperation({summary: 'Edit account info'})
   @Patch(':id')
   @ApiOkResponse({ type: AccountEntity})
-  update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
-    return this.accountsService.update(+id, updateAccountDto);
+  async update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) : Promise<AccountEntity> {
+    return await this.accountsService.update(+id, updateAccountDto);
   }
 
+  @ApiOperation({summary: 'Delete account'})
   @Delete(':id')
   @ApiOkResponse({ type: AccountEntity})
-  remove(@Param('id') id: string) {
-    return this.accountsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.accountsService.remove(+id);
   }
 }

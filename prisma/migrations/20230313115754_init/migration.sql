@@ -8,6 +8,7 @@ CREATE TYPE "OperationType" AS ENUM ('expense', 'income');
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "email" TEXT NOT NULL,
     "name" TEXT,
     "password" TEXT NOT NULL,
@@ -19,6 +20,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Account" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "balance" DECIMAL(65,30) NOT NULL,
@@ -33,6 +35,7 @@ CREATE TABLE "Account" (
 CREATE TABLE "Transaction" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "operationType" "OperationType" NOT NULL,
     "amount" DECIMAL(65,30) NOT NULL,
     "categoryId" INTEGER NOT NULL,

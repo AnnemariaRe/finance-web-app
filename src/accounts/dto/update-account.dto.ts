@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { AccountType, Prisma } from '@prisma/client';
 import Decimal from 'decimal.js';
+import { AccountType } from 'src/enums/AccountType';
 import { CreateAccountDto } from './create-account.dto';
 
 export class UpdateAccountDto extends PartialType(CreateAccountDto) {

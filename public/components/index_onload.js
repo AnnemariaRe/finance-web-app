@@ -18,20 +18,20 @@ window.onload = function () {
         }
     }
 
-    getCurrency('https://api.currencyapi.com/v3/latest?apikey=uB9jmOX6xlypRBtHq65elzi5AZAaUI27vSXSniFo&currencies=EUR%2CUSD%2CUAH%2CKZT&base_currency=RUB')
-    .then(response => JSON.parse(response))
-    .then(data => setTimeout(() => { 
-        document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.EUR);
-        document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.USD);
-        document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.UAH);
-        document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.KZT);
-    }, 1000))
-    .catch(error => { 
-        console.error(error);
-    });
+    // getCurrency('https://api.currencyapi.com/v3/latest?apikey=uB9jmOX6xlypRBtHq65elzi5AZAaUI27vSXSniFo&currencies=EUR%2CUSD%2CUAH%2CKZT&base_currency=RUB')
+    // .then(response => JSON.parse(response))
+    // .then(data => setTimeout(() => { 
+    //     document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.EUR);
+    //     document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.USD);
+    //     document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.UAH);
+    //     document.getElementById("exchange").innerHTML += generateSubmitFromAPI(data.data.KZT);
+    // }, 1000))
+    // .catch(error => { 
+    //     console.error(error);
+    // });
 
-    $(document).ready( function () {
-        $('#history').DataTable( {
+    $(document).ready(function () {
+        $('#history').DataTable({
             searching: false,
             "lengthChange": false,
             "pageLength": 15,
@@ -48,7 +48,7 @@ window.onload = function () {
                 search: "Поиск:"
             },
         });
-    } );
+    });
 }
 
 function generateSubmit(submit_info) {

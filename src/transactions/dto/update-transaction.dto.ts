@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { Category, OperationType } from '@prisma/client';
 import Decimal from "decimal.js";
+import { OperationType } from 'src/enums/OperationType';
 import { CreateTransactionDto } from './create-transaction.dto';
 
 export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {
@@ -9,7 +9,7 @@ export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {
     @ApiProperty({ required: false })
     amount: Decimal;
     @ApiProperty({ required: false })
-    category: Category;
+    categoryId: number;
     @ApiProperty({ required: false })
     accountId: number;
     @ApiProperty({ required: false })

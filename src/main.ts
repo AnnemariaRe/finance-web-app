@@ -5,7 +5,6 @@ import { AppModule } from './app.module';
 import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import hbs = require('hbs');
-import { PrismaService } from './prisma/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -21,8 +20,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
-  const prismaService = app.get(PrismaService);
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));

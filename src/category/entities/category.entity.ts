@@ -1,12 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import Decimal from "decimal.js";
-import { AccountType } from "src/enums/AccountType";
+import { OperationType } from "src/enums/OperationType";
 import { Transaction } from "src/transactions/entities/transaction.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Account {
+export class Category {
     @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,32 +16,20 @@ export class Account {
 
     @ApiProperty()
     @Column()
-    title: string;
-
-    @ApiProperty()
-    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
-    balance: number;
-
-    @ApiProperty()
-    @Column({ default: true })
-    isActive: boolean;
-
-    @ApiProperty()
-    @Column()
-    currency: string;
+    name: string;
 
     @ApiProperty()
     @Column({
         type: 'enum',
-        enum: AccountType
+        enum: OperationType
       })
-    accountType: AccountType;
+    operationType: OperationType;
 
     @ApiProperty()
-    @ManyToOne(type => User, user => user.accounts)
+    @ManyToOne(type => User, user => user.accounts, { nullable: true })
     user: User;
 
     @ApiProperty()
-    @OneToMany(type => Transaction, transaction => transaction.account)
+    @OneToMany(type => Transaction, transaction => transaction.category)
     transactions: Transaction;
 }

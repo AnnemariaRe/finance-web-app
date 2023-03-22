@@ -1,20 +1,40 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Category, OperationType, Transaction } from "@prisma/client";
-import Decimal from "decimal.js";
+import { Account } from "src/accounts/entities/account.entity";
+import { Category } from "src/category/entities/category.entity";
+import { OperationType } from "src/enums/OperationType";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-export class TransactionEntity implements Transaction {
+@Entity()
+export class Transaction {
     @ApiProperty()
+    @PrimaryGeneratedColumn()
     id: number;
+
     @ApiProperty()
+    @Column()
     createdAt: Date;
+
     @ApiProperty()
+    @Column({
+        type: 'enum',
+        enum: OperationType
+      })
     operationType: OperationType;
+
     @ApiProperty()
-    amount: Decimal;
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    amount: number;
+
     @ApiProperty()
+    @Column()
+    date: Date;
+    
+    @ApiProperty()
+    @ManyToOne(type => Account, account => account.transactions)
+    account: number;
+
+    @ApiProperty()
+    @ManyToOne(type => Category, category => category.transactions)
     category: Category;
-    @ApiProperty()
-    accountId: number;
-    @ApiProperty()
-    transactionDate: Date;
 }
+

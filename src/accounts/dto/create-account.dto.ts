@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountType, Prisma } from "@prisma/client";
 import Decimal from "decimal.js";
+import { AccountType } from "src/enums/AccountType";
 
 export class CreateAccountDto {
     @ApiProperty()

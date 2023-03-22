@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Category, OperationType } from "@prisma/client";
 import Decimal from "decimal.js";
+import { OperationType } from "src/enums/OperationType";
 
 export class CreateTransactionDto {
     @ApiProperty()
@@ -8,7 +8,7 @@ export class CreateTransactionDto {
     @ApiProperty()
     amount: Decimal;
     @ApiProperty()
-    category: Category;
+    categoryId: number;
     @ApiProperty()
     accountId: number;
     @ApiProperty()

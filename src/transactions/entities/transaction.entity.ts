@@ -31,7 +31,7 @@ export class Transaction {
     
     @ApiProperty()
     @ManyToOne(() => Account, account => account.transactions)
-    account: number;
+    account: Account;
 
     @ApiProperty()
     @ManyToOne(() => Category, category => category.transactions)

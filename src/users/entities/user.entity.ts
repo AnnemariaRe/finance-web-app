@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Account } from 'src/accounts/entities/account.entity';
 import { Category } from 'src/categories/entities/category.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -10,11 +10,11 @@ export class User {
     id: number;
 
     @ApiProperty()
-    @Column()
+    @CreateDateColumn()
     createdAt: Date;
 
     @ApiProperty()
-    @Column()
+    @UpdateDateColumn()
     updatedAt: Date;
 
     @ApiProperty()

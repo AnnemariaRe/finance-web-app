@@ -1,5 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import Decimal from "decimal.js";
 import { AccountType } from "src/enums/AccountType";
 import { Transaction } from "src/transactions/entities/transaction.entity";
 import { User } from "src/users/entities/user.entity";

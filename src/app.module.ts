@@ -6,19 +6,19 @@ import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { UsersModule } from './users/users.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { TransactionsModule } from './transactions/transactions.module';
-import { CategoryModule } from './category/category.module';
+import { CategoriesModule } from './categories/categories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Transaction } from './transactions/entities/transaction.entity';
 import { User } from './users/entities/user.entity';
 import { Account } from './accounts/entities/account.entity';
-import { Category } from './category/entities/category.entity';
+import { Category } from './categories/entities/category.entity';
 
 @Module({
   controllers: [AppController],
   providers: [AppService, {
       provide: APP_INTERCEPTOR,
       useClass: ResponseTimeInterceptor}],
-  imports: [UsersModule, AccountsModule, TransactionsModule, CategoryModule,
+  imports: [UsersModule, AccountsModule, TransactionsModule, CategoriesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cg31sbseoogop1850im0-a.frankfurt-postgres.render.com',

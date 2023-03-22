@@ -30,11 +30,11 @@ export class Transaction {
     date: Date;
     
     @ApiProperty()
-    @ManyToOne(type => Account, account => account.transactions)
+    @ManyToOne(() => Account, account => account.transactions)
     account: number;
 
     @ApiProperty()
-    @ManyToOne(type => Category, category => category.transactions)
+    @ManyToOne(() => Category, category => category.transactions)
     category: Category;
 }
 

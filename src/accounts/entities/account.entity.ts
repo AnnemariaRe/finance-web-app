@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Currency } from "src/currencies/entities/currency.entity";
 import { AccountType } from "src/enums/AccountType";
 import { Transaction } from "src/transactions/entities/transaction.entity";
 import { User } from "src/users/entities/user.entity";
@@ -27,10 +28,6 @@ export class Account {
     isActive: boolean;
 
     @ApiProperty()
-    @Column()
-    currency: string;
-
-    @ApiProperty()
     @Column({
         type: 'enum',
         enum: AccountType
@@ -38,10 +35,14 @@ export class Account {
     accountType: AccountType;
 
     @ApiProperty()
-    @ManyToOne(type => User, user => user.accounts)
+    @ManyToOne(() => User, user => user.accounts)
     user: User;
 
     @ApiProperty()
-    @OneToMany(type => Transaction, transaction => transaction.account)
+    @ManyToOne(() => Currency, currency => currency.accounts)
+    currency: Currency;
+
+    @ApiProperty()
+    @OneToMany(() => Transaction, transaction => transaction.account)
     transactions: Transaction;
 }

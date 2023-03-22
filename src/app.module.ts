@@ -12,6 +12,8 @@ import { Transaction } from './transactions/entities/transaction.entity';
 import { User } from './users/entities/user.entity';
 import { Account } from './accounts/entities/account.entity';
 import { Category } from './categories/entities/category.entity';
+import { CurrenciesModule } from './currencies/currencies.module';
+import { Currency } from './currencies/entities/currency.entity';
 
 @Module({
   controllers: [AppController],
@@ -26,10 +28,11 @@ import { Category } from './categories/entities/category.entity';
       username: 'annemarias_db_user',
       password: 'Yhnrvpy3eDQKyc76U83n6nFkSE70sWLr',
       database: 'annemarias_db',
-      entities: [User, Transaction, Account, Category],
+      entities: [User, Transaction, Account, Category, Currency],
       synchronize: true,
       ssl: true
-    }),],
+    }),
+    CurrenciesModule,],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

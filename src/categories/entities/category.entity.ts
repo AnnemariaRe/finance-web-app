@@ -26,10 +26,10 @@ export class Category {
     operationType: OperationType;
 
     @ApiProperty()
-    @ManyToOne(type => User, user => user.accounts, { nullable: true })
+    @ManyToOne(() => User, user => user.accounts, { nullable: true })
     user: User;
 
     @ApiProperty()
-    @OneToMany(type => Transaction, transaction => transaction.category)
+    @OneToMany(() => Transaction, transaction => transaction.category)
     transactions: Transaction;
 }

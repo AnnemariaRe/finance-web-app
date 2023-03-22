@@ -30,10 +30,10 @@ export class User {
     password: string;
 
     @ApiProperty()
-    @OneToMany(type => Account, account => account.user)
+    @OneToMany(() => Account, account => account.user)
     accounts: Account[];
 
     @ApiProperty()
-    @OneToMany(type => Category, category => category.user)
+    @OneToMany(() => Category, category => category.user)
     categories: Category[];
 }

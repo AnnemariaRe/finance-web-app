@@ -25,6 +25,6 @@ export class Currency {
     symbol: string;
     
     @ApiProperty({ type: () => Account })
-    @OneToMany((type) => Account, account => account.currency, { cascade: true })
+    @OneToMany(() => Account, account => account.currency, { cascade: true })
     accounts: Account[];
 }

@@ -17,6 +17,8 @@ async function bootstrap() {
     .addTag('user')
     .addTag('account')
     .addTag('transaction')
+    .addTag('category')
+    .addTag('currency')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

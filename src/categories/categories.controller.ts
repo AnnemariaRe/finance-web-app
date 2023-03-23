@@ -1,33 +1,32 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { Category } from './entities/category.entity';
 
 @Controller('category')
+@ApiTags('category')
 export class CategoriesController {
   constructor(private readonly categoryService: CategoriesService) {}
 
+  @ApiOperation({summary: 'Create category'})
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoryService.create(createCategoryDto);
+  @ApiCreatedResponse({ type: Category })
+  async create(@Body() createCategoryDto: CreateCategoryDto) : Promise<Category> {
+    return await this.categoryService.create(createCategoryDto);
   }
 
-  @Get()
-  findAll() {
-    return this.categoryService.findAll();
-  }
-
+  @ApiOperation({summary: 'Get category'})
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  @ApiOkResponse({ type: Category})
+  findOne(@Param('id') id: string) : Promise<Category> {
     return this.categoryService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryService.update(+id, updateCategoryDto);
-  }
-
+  @ApiOperation({summary: 'Delete category'})
   @Delete(':id')
+  @ApiOkResponse({ type: Category})
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);
   }

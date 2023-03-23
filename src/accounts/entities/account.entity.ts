@@ -34,15 +34,15 @@ export class Account {
       })
     accountType: AccountType;
 
-    @ApiProperty()
+    @ApiProperty({ type: () => User })
     @ManyToOne(() => User, user => user.accounts)
     user: User;
 
-    @ApiProperty()
+    @ApiProperty({ type: () => Currency })
     @ManyToOne(() => Currency, currency => currency.accounts)
     currency: Currency;
 
-    @ApiProperty()
-    @OneToMany(() => Transaction, transaction => transaction.account)
-    transactions: Transaction;
+    @ApiProperty({ type: () => Transaction })
+    @OneToMany(() => Transaction, transaction => transaction.account, { cascade: true })
+    transactions: Transaction[];
 }

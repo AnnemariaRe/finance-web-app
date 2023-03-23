@@ -29,11 +29,11 @@ export class Transaction {
     @Column()
     date: Date;
     
-    @ApiProperty()
+    @ApiProperty({ type: () => Account })
     @ManyToOne(() => Account, account => account.transactions)
     account: Account;
 
-    @ApiProperty()
+    @ApiProperty({ type: () => Category })
     @ManyToOne(() => Category, category => category.transactions)
     category: Category;
 }

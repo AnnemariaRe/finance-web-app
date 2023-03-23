@@ -25,11 +25,11 @@ export class Category {
       })
     operationType: OperationType;
 
-    @ApiProperty()
+    @ApiProperty({ type: () => User })
     @ManyToOne(() => User, user => user.accounts, { nullable: true })
     user: User;
 
-    @ApiProperty()
-    @OneToMany(() => Transaction, transaction => transaction.category)
-    transactions: Transaction;
+    @ApiProperty({ type: () => Transaction })
+    @OneToMany(() => Transaction, transaction => transaction.category, { cascade: true })
+    transactions: Transaction[];
 }

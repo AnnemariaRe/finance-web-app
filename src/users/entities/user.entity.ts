@@ -29,11 +29,11 @@ export class User {
     @Column()
     password: string;
 
-    @ApiProperty()
-    @OneToMany(() => Account, account => account.user)
+    @ApiProperty({ type: () => Account })
+    @OneToMany(() => Account, account => account.user, { cascade: true })
     accounts: Account[];
 
-    @ApiProperty()
-    @OneToMany(() => Category, category => category.user)
+    @ApiProperty({ type: () => Category })
+    @OneToMany(() => Category, category => category.user, { cascade: true })
     categories: Category[];
 }

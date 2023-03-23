@@ -20,7 +20,7 @@ import { Currency } from './currencies/entities/currency.entity';
   providers: [AppService, {
       provide: APP_INTERCEPTOR,
       useClass: ResponseTimeInterceptor}],
-  imports: [UsersModule, AccountsModule, TransactionsModule, CategoriesModule,
+  imports: [UsersModule, AccountsModule, TransactionsModule, CategoriesModule, CurrenciesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cg31sbseoogop1850im0-a.frankfurt-postgres.render.com',

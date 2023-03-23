@@ -1,70 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { Transaction } from './entities/transaction.entity';
 
 @Injectable()
-export class TransactionsService {
-  // constructor(private prisma: PrismaService) {
-  // }
+export default class TransactionsService {
+  constructor(
+    @InjectRepository(Transaction)
+    private readonly transactionRepository: Repository<Transaction>,
+    ) {}
 
-  // create(createTransactionDto: CreateTransactionDto) {
-  //   const { accountId, operationType, amount, categoryId, transactionDate } = createTransactionDto;
-  //   const account = this.prisma.account.update({
-  //     where: {
-  //       id: accountId,
-  //     },
-  //     data: {
-  //       transactions: {
-  //         create: { operationType, amount, categoryId, transactionDate },
-  //       },
-  //     },
-  //     include: {
-  //       transactions: { take: -1 }
-  //     }
-  //   });
-  //   return account.transactions[-1];
-  // }
+  async create(createTransactionDto: CreateTransactionDto) {
+    const { account, operationType, amount, category, date } = createTransactionDto;
 
-  // findAllFromUser(userId: number) {
-  //   const user = this.prisma.user.findUnique({
-  //     where: { id: userId  },
-  //     include: { accounts: { include: { transactions: true } } },
-  //   })
+    const transaction = new Transaction();
+    transaction.operationType = operationType;
+    transaction.amount = amount;
+    transaction.category = category;
+    transaction.date = date;
+    transaction.account = account;
 
-  //   const transactions = []
-  //   for (let i = 0; i < user.accounts.length; i++) {
-  //     for (const transaction of user.accounts[i].transactions) {
-  //       transactions.push(transaction);
-  //     }
-  //   }
+    await this.transactionRepository.save(transaction);
+    return transaction;
+  }
 
-  //   return transactions;
-  // }
+  findOne(id: number) {
+    return this.transactionRepository.findOne({ where: { id } });
+  }
 
-  // findAllFromUserAccount(userId: number, accountId: number) {
-  //   return this.prisma.transaction.findMany({
-  //     where: { accountId, account: { userId: userId } },
-  //   })
-  // }
-
-  // findAllFromUserWithOperationType(userId: number, operationType: OperationType) {
-  //   return this.prisma.transaction.findMany({
-  //     where: { account: { userId: userId }, operationType },
-  //   });
-  // }
-
-  // findOne(id: number) {
-  //   return this.prisma.transaction.findUnique({ where: { id } });
-  // }
-
-  // update(id: number, updateTransactionDto: UpdateTransactionDto) {
-  //   return this.prisma.transaction.update({
-  //     where: { id },
-  //     data: updateTransactionDto,
-  //   });
-  // }
-
-  // remove(id: number) {
-  //   return this.prisma.account.delete({ where: { id } });
-  // }
+  update(id: number, updateTransactionDto: UpdateTransactionDto) {
+    return this.transactionRepository.save({ id, updateTransactionDto });
+  }
 }

@@ -1,16 +1,18 @@
 import { ApiProperty } from "@nestjs/swagger";
 import Decimal from "decimal.js";
+import { Account } from "src/accounts/entities/account.entity";
+import { Category } from "src/categories/entities/category.entity";
 import { OperationType } from "src/enums/OperationType";
 
 export class CreateTransactionDto {
     @ApiProperty()
     operationType: OperationType;
     @ApiProperty()
-    amount: Decimal;
+    amount: number;
     @ApiProperty()
-    categoryId: number;
+    category: Category;
     @ApiProperty()
-    accountId: number;
+    account: Account;
     @ApiProperty()
-    transactionDate: Date;
+    date: Date;
 }

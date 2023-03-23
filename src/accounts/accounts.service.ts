@@ -1,46 +1,45 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
+import { Account } from './entities/account.entity';
 
 @Injectable()
 export class AccountsService {
-  // constructor(private prisma: PrismaService) {
-  // }
+  constructor(
+    @InjectRepository(Account)
+    private readonly accountRepository: Repository<Account>,
+    ) {}
 
-  // create(createAccountDto: CreateAccountDto) {
-  //   const { userId, title, balance, currency, accountType } = createAccountDto;
-  //   const user = this.prisma.user.update({
-  //     where: {
-  //       id: userId,
-  //     },
-  //     data: {
-  //       accounts: {
-  //         create: { title, balance, currency, accountType },
-  //       },
-  //     },
-  //     include: {
-  //       accounts: { take: -1 }
-  //     }
-  //   });
-  //   return user.accounts[-1];
-  // }
+  async create(createAccountDto: CreateAccountDto) {
+    const { user, title, balance, currency, accountType } = createAccountDto;
 
-  // findAllFromUser(userId: number) {
-  //   return this.prisma.account.findMany({ where: { userId } });
-  // }
+    const account = new Account();
+    account.user = user;
+    account.accountType = accountType;
+    account.balance = balance;
+    account.currency = currency;
+    account.title = title;
 
-  // findOne(id: number) {
-  //   return this.prisma.account.findUnique({ where: { id } });
-  // }
+    await this.accountRepository.save(account);
+    return account;
+  }
 
-  // update(id: number, updateAccountDto: UpdateAccountDto) {
-  //   return this.prisma.account.update({
-  //     where: { id },
-  //     data: updateAccountDto,
-  //   });
-  // }
+  async findAllTransactions(id: number) {
+    const account = await this.accountRepository.findOne({ where: { id } });
+    return account.transactions;
+  }
 
-  // remove(id: number) {
-  //   return this.prisma.account.delete({ where: { id } });
-  // }
+  async findOne(id: number) {
+    return await this.accountRepository.findOne({ where: { id } });
+  }
+
+  async update(id: number, updateAccountDto: UpdateAccountDto) {
+    return this.accountRepository.save({ id, updateAccountDto });
+  }
+
+  async remove(id: number) {
+    return this.accountRepository.delete(id);
+  }
 }

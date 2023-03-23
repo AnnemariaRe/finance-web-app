@@ -1,16 +1,18 @@
 import { ApiProperty } from "@nestjs/swagger";
 import Decimal from "decimal.js";
+import { Currency } from "src/currencies/entities/currency.entity";
 import { AccountType } from "src/enums/AccountType";
+import { User } from "src/users/entities/user.entity";
 
 export class CreateAccountDto {
     @ApiProperty()
-    userId: number;
+    user: User;
     @ApiProperty()
     title: string;
     @ApiProperty()
-    balance: Decimal;
+    balance: number;
     @ApiProperty()
-    currency: string;
+    currency: Currency;
     @ApiProperty()
     accountType: AccountType;
 }

@@ -36,10 +36,10 @@ export class AccountsService {
   }
 
   async update(id: number, updateAccountDto: UpdateAccountDto) {
-    return this.accountRepository.save({ id, updateAccountDto });
+    return await this.accountRepository.save({ id, updateAccountDto });
   }
 
   async remove(id: number) {
-    return this.accountRepository.delete(id);
+    return await this.accountRepository.delete(id);
   }
 }

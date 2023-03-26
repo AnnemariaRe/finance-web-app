@@ -26,11 +26,11 @@ export default class TransactionsService {
     return transaction;
   }
 
-  findOne(id: number) {
-    return this.transactionRepository.findOne({ where: { id } });
+  async findOne(id: number) {
+    return await this.transactionRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return this.transactionRepository.save({ id, updateTransactionDto });
+  async update(id: number, updateTransactionDto: UpdateTransactionDto) {
+    return await this.transactionRepository.save({ id, updateTransactionDto });
   }
 }

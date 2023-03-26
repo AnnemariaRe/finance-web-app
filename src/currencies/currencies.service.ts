@@ -23,11 +23,11 @@ export class CurrenciesService {
     return currency;
   }
 
-  findAll() {
-    return this.currencyRepository.find();
+  async findAll() {
+    return await this.currencyRepository.find();
   }
 
-  findOne(id: number) {
-    return this.currencyRepository.findOne({ where: { id } });
+  async findOne(id: number) {
+    return await this.currencyRepository.findOne({ where: { id } });
   }
 }

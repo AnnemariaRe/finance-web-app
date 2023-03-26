@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CurrenciesService } from './currencies.service';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { Currency } from './entities/currency.entity';
 
 @Controller('currencies')
+@ApiTags('currency')
 export class CurrenciesController {
   constructor(private readonly currenciesService: CurrenciesService) {}
 
@@ -22,7 +23,7 @@ export class CurrenciesController {
     return this.currenciesService.findAll();
   }
 
-  @ApiOperation({summary: 'Get currency by id'})
+  @ApiOperation({summary: 'Get currency'})
   @Get(':id')
   @ApiOkResponse({ type: Currency })
   findOne(@Param('id') id: string) : Promise<Currency> {

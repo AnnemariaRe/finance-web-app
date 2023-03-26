@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './entities/category.entity';
 
-@Controller('category')
+@Controller('categories')
 @ApiTags('category')
 export class CategoriesController {
   constructor(private readonly categoryService: CategoriesService) {}
@@ -23,9 +24,16 @@ export class CategoriesController {
     return this.categoryService.findOne(+id);
   }
 
+  @ApiOperation({summary: 'Get all category transactions'})
+  @Get('transactions/:id')
+  @ApiOkResponse({ type: Transaction })
+  findAllTransactions(@Param('id') id: string) : Promise<Transaction[]> {
+    return this.categoryService.findAllTransactions(+id);
+  }
+
   @ApiOperation({summary: 'Delete category'})
   @Delete(':id')
-  @ApiOkResponse({ type: Category})
+  @ApiOkResponse({ type: Category })
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);
   }

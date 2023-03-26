@@ -20,28 +20,28 @@ export class AccountsController {
 
   @ApiOperation({summary: 'Get all account transactions'})
   @Get('transactions/:id')
-  @ApiOkResponse({ type: Account})
+  @ApiOkResponse({ type: Transaction })
   async findAllTransactions(@Param('id') id: string) : Promise<Transaction[]> {
     return await this.accountsService.findAllTransactions(+id);
   }
 
   @ApiOperation({summary: 'Get account'})
   @Get(':id')
-  @ApiOkResponse({ type: Account})
+  @ApiOkResponse({ type: Account })
   async findOne(@Param('id') id: string) : Promise<Account> {
     return await this.accountsService.findOne(+id);
   }
 
   @ApiOperation({summary: 'Edit account info'})
   @Patch(':id')
-  @ApiOkResponse({ type: Account})
+  @ApiOkResponse({ type: Account })
   async update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) : Promise<Account> {
     return await this.accountsService.update(+id, updateAccountDto);
   }
 
   @ApiOperation({summary: 'Delete account'})
   @Delete(':id')
-  @ApiOkResponse({ type: Account})
+  @ApiOkResponse({ type: Account })
   async remove(@Param('id') id: string) {
     return await this.accountsService.remove(+id);
   }

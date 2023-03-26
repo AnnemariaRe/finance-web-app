@@ -11,11 +11,11 @@ export class UsersService {
     private usersRepository: Repository<User>
     ) {}
   
-  create(createUserDto: CreateUserDto) {
-    return this.usersRepository.save(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    return await this.usersRepository.save(createUserDto);
   }
 
-  findOne(id: number) {
-    return this.usersRepository.findOne({ where: { id } });
+  async findOne(id: number) {
+    return await this.usersRepository.findOne({ where: { id } });
   }
 }

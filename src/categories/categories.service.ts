@@ -22,11 +22,16 @@ export class CategoriesService {
     return category;
   }
 
-  findOne(id: number) {
-    return this.categoryRepository.findOne({ where: { id } });
+  async findOne(id: number) {
+    return await this.categoryRepository.findOne({ where: { id } });
   }
 
-  remove(id: number) {
-    return this.categoryRepository.delete(id);
+  async findAllTransactions(id: number) {
+    const category = await this.categoryRepository.findOne({ where: { id } });
+    return category.transactions;
+  }
+
+  async remove(id: number) {
+    return await this.categoryRepository.delete(id);
   }
 }

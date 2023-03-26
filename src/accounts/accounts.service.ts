@@ -26,11 +26,6 @@ export class AccountsService {
     return account;
   }
 
-  async findAllTransactions(id: number) {
-    const account = await this.accountRepository.findOne({ where: { id } });
-    return account.transactions;
-  }
-
   async findOne(id: number) {
     return await this.accountRepository.findOne({ where: { id } });
   }

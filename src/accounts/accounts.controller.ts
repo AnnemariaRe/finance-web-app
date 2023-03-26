@@ -18,13 +18,6 @@ export class AccountsController {
     return await this.accountsService.create(createAccountDto);
   }
 
-  @ApiOperation({summary: 'Get all account transactions'})
-  @Get('transactions/:id')
-  @ApiOkResponse({ type: Transaction })
-  async findAllTransactions(@Param('id') id: string) : Promise<Transaction[]> {
-    return await this.accountsService.findAllTransactions(+id);
-  }
-
   @ApiOperation({summary: 'Get account'})
   @Get(':id')
   @ApiOkResponse({ type: Account })

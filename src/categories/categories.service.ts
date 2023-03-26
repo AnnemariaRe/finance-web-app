@@ -26,11 +26,6 @@ export class CategoriesService {
     return await this.categoryRepository.findOne({ where: { id } });
   }
 
-  async findAllTransactions(id: number) {
-    const category = await this.categoryRepository.findOne({ where: { id } });
-    return category.transactions;
-  }
-
   async remove(id: number) {
     return await this.categoryRepository.delete(id);
   }

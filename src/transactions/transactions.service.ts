@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Account } from 'src/accounts/entities/account.entity';
+import { Category } from 'src/categories/entities/category.entity';
 import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
@@ -10,10 +12,16 @@ export default class TransactionsService {
   constructor(
     @InjectRepository(Transaction)
     private readonly transactionRepository: Repository<Transaction>,
+    @InjectRepository(Account)
+    private readonly accountRepository: Repository<Account>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
     ) {}
 
-  async create(createTransactionDto: CreateTransactionDto) {
-    const { account, operationType, amount, category, date } = createTransactionDto;
+  async create(accountId: number, categoryId: number, createTransactionDto: CreateTransactionDto) {
+    const { operationType, amount, date } = createTransactionDto;
+    const account = await this.accountRepository.findOne({where: { id: accountId }});
+    const category = await this.categoryRepository.findOne({where: { id: categoryId }});
 
     const transaction = new Transaction();
     transaction.operationType = operationType;

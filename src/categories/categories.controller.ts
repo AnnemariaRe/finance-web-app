@@ -12,8 +12,8 @@ export class CategoriesController {
   @ApiOperation({summary: 'Create category'})
   @Post()
   @ApiCreatedResponse({ type: Category })
-  async create(@Body() createCategoryDto: CreateCategoryDto) : Promise<Category> {
-    return await this.categoryService.create(createCategoryDto);
+  async create(@Param('userId') userId: string, @Body() createCategoryDto: CreateCategoryDto) : Promise<Category> {
+    return await this.categoryService.create(+userId, createCategoryDto);
   }
 
   @ApiOperation({summary: 'Get category'})

@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Currency } from 'src/currencies/entities/currency.entity';
+import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -10,10 +12,16 @@ export class AccountsService {
   constructor(
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+    @InjectRepository(Currency)
+    private readonly currencyRepository: Repository<Currency>,
     ) {}
 
-  async create(createAccountDto: CreateAccountDto) {
-    const { user, title, balance, currency, accountType } = createAccountDto;
+  async create(userId: number, currencyId: number, createAccountDto: CreateAccountDto) {
+    const { title, balance, accountType } = createAccountDto;
+    const user = await this.userRepository.findOne({where: { id: userId}});
+    const currency = await this.currencyRepository.findOne({where: { id: currencyId}});
 
     const account = new Account();
     account.user = user;

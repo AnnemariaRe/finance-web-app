@@ -12,7 +12,5 @@ export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {
     @ApiProperty({ required: false })
     category: Category;
     @ApiProperty({ required: false })
-    account: Account;
-    @ApiProperty({ required: false })
     date: Date;
 }

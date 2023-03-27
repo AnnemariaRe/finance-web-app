@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import TransactionsService from './transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
@@ -13,8 +13,8 @@ export class TransactionsController {
   @ApiOperation({summary: 'Create transaction'})
   @Post()
   @ApiCreatedResponse({ type: Transaction })
-  async create(@Body() createTransactionDto: CreateTransactionDto) : Promise<Transaction> {
-    return await this.transactionsService.create(createTransactionDto);
+  async create(@Param('accountId') accountId: string, @Param('categoryId') categoryId: string, @Body() createTransactionDto: CreateTransactionDto) : Promise<Transaction> {
+    return await this.transactionsService.create(+accountId, +categoryId, createTransactionDto);
   }
 
   @ApiOperation({summary: 'Get transaction'})

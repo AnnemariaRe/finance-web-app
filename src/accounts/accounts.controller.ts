@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { User } from 'src/users/entities/user.entity';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -13,9 +14,10 @@ export class AccountsController {
 
   @ApiOperation({summary: 'Create account'})
   @Post()
+  @ApiBody({ type: [CreateAccountDto] })
   @ApiCreatedResponse({ type: Account })
-  async create(@Body() createAccountDto: CreateAccountDto) : Promise<Account> {
-    return await this.accountsService.create(createAccountDto);
+  async create(@Param('userId') userId: string, @Param('currencyId') currencyId: string, @Body() createAccountDto: CreateAccountDto) : Promise<Account> {
+    return await this.accountsService.create(+userId, +currencyId, createAccountDto);
   }
 
   @ApiOperation({summary: 'Get account'})

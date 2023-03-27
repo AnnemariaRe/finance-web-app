@@ -23,16 +23,11 @@ import { Currency } from './currencies/entities/currency.entity';
   imports: [UsersModule, AccountsModule, TransactionsModule, CategoriesModule, CurrenciesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'dpg-cg31sbseoogop1850im0-a.frankfurt-postgres.render.com',
-      port: 5432,
-      username: 'annemarias_db_user',
-      password: 'Yhnrvpy3eDQKyc76U83n6nFkSE70sWLr',
-      database: 'annemarias_db',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
       entities: [User, Transaction, Account, Category, Currency],
-      synchronize: true,
-      ssl: true
-    }),
-    CurrenciesModule,],
+      synchronize: true
+    })],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

@@ -31,6 +31,11 @@ export class CategoriesService {
     return await this.categoryRepository.findOne({ where: { id } });
   }
 
+  async findAllByUserId(userId: number) {
+    const user  = await this.userRepository.findOne({ where: { id: userId }});
+    return user.categories;
+  }
+
   async remove(id: number) {
     return await this.categoryRepository.delete(id);
   }

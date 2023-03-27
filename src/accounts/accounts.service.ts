@@ -38,6 +38,17 @@ export class AccountsService {
     return await this.accountRepository.findOne({ where: { id } });
   }
 
+  async findAllByUserId(userId: number) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    return user.accounts;
+  }
+
+  async findAllActiveByUserId(userId: number) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    const activeAccounts = user.accounts.filter(account => account.isActive);
+    return activeAccounts;
+  }
+
   async update(id: number, updateAccountDto: UpdateAccountDto) {
     return await this.accountRepository.save({ id, updateAccountDto });
   }

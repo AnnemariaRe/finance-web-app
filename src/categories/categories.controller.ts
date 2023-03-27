@@ -23,6 +23,13 @@ export class CategoriesController {
     return this.categoryService.findOne(+id);
   }
 
+  @ApiOperation({summary: 'Get all user categories'})
+  @Get(':userId')
+  @ApiOkResponse({ type: Category, isArray: true })
+  async findAllByUserId(@Param('userId') userId: string) : Promise<Category[]> {
+    return await this.categoryService.findAllByUserId(+userId);
+  }
+
   @ApiOperation({summary: 'Delete category'})
   @Delete(':id')
   @ApiOkResponse({ type: Category })

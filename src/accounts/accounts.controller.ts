@@ -27,6 +27,20 @@ export class AccountsController {
     return await this.accountsService.findOne(+id);
   }
 
+  @ApiOperation({summary: 'Get all user accounts'})
+  @Get(':userId')
+  @ApiOkResponse({ type: Account, isArray: true })
+  async findAllByUserId(@Param('userId') userId: string) : Promise<Account[]> {
+    return this.accountsService.findAllByUserId(+userId);
+  }
+
+  @ApiOperation({summary: 'Get all user active accounts'})
+  @Get('active/:userId')
+  @ApiOkResponse({ type: Account, isArray: true })
+  async findAllActiveByUserId(@Param('userId') userId: string) : Promise<Account[]> {
+    return this.accountsService.findAllActiveByUserId(+userId);
+  }
+
   @ApiOperation({summary: 'Edit account info'})
   @Patch(':id')
   @ApiOkResponse({ type: Account })

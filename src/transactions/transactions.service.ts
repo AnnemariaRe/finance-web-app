@@ -23,12 +23,11 @@ export default class TransactionsService {
     ) {}
 
   async create(accountId: number, categoryId: number, createTransactionDto: CreateTransactionDto) {
-    const { operationType, amount, date } = createTransactionDto;
+    const { amount, date } = createTransactionDto;
     const account = await this.accountRepository.findOne({where: { id: accountId }});
     const category = await this.categoryRepository.findOne({where: { id: categoryId }});
 
     const transaction = new Transaction();
-    transaction.operationType = operationType;
     transaction.amount = amount;
     transaction.category = category;
     transaction.date = date;
@@ -56,15 +55,15 @@ export default class TransactionsService {
     return account.transactions;
   }
 
-  async findAllFromUserWithOperationType(userId: number, transactionType: OperationType) {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-    const transactions = user.accounts.reduce(
-      (acc, account) => acc.concat(account.transactions),
-      [],
-    );
-    const filteredTransactions = transactions.filter(transaction => transaction.OperationType == transactionType);
-    return filteredTransactions;
-  }
+  // async findAllFromUserWithOperationType(userId: number, transactionType: OperationType) {
+  //   const user = await this.userRepository.findOne({ where: { id: userId } });
+  //   const transactions = user.accounts.reduce(
+  //     (acc, account) => acc.concat(account.transactions),
+  //     [],
+  //   );
+  //   const filteredTransactions = transactions.filter(transaction => transaction.OperationType == transactionType);
+  //   return filteredTransactions;
+  // }
 
   async findAllFromUserInCategory(userId: number, categoryId: number) {
     const user = await this.userRepository.findOne({ where: { id: userId } });

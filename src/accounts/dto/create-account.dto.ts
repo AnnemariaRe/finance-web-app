@@ -7,7 +7,5 @@ export class CreateAccountDto {
     @ApiProperty()
     title: string;
     @ApiProperty()
-    balance: number;
-    @ApiProperty()
     accountType: AccountType;
 }

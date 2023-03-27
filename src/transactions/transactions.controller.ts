@@ -39,12 +39,12 @@ export class TransactionsController {
     return await this.transactionsService.findAllByAccountId(+accountId);
   }
 
-  @ApiOperation({summary: 'Get all (expense or income) transactions'})
-  @Get(':userId/:operationType')
-  @ApiOkResponse({ type: Transaction, isArray: true })
-  async findAllFromUserWithOperationType(@Param('userId') userId: string, @Param('transactionType') transactionType: OperationType) : Promise<Transaction[]> {
-    return await this.transactionsService.findAllFromUserWithOperationType(+userId, transactionType);
-  }
+  // @ApiOperation({summary: 'Get all (expense or income) transactions'})
+  // @Get(':userId/:operationType')
+  // @ApiOkResponse({ type: Transaction, isArray: true })
+  // async findAllFromUserWithOperationType(@Param('userId') userId: string, @Param('transactionType') transactionType: OperationType) : Promise<Transaction[]> {
+  //   return await this.transactionsService.findAllFromUserWithOperationType(+userId, transactionType);
+  // }
 
   @ApiOperation({summary: 'Get all transactions in category'})
   @Get(':userId/:category')

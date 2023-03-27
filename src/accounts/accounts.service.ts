@@ -19,14 +19,13 @@ export class AccountsService {
     ) {}
 
   async create(userId: number, currencyId: number, createAccountDto: CreateAccountDto) {
-    const { title, balance, accountType } = createAccountDto;
+    const { title, accountType } = createAccountDto;
     const user = await this.userRepository.findOne({where: { id: userId}});
     const currency = await this.currencyRepository.findOne({where: { id: currencyId}});
 
     const account = new Account();
     account.user = user;
     account.accountType = accountType;
-    account.balance = balance;
     account.currency = currency;
     account.title = title;
 

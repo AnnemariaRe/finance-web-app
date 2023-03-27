@@ -15,13 +15,6 @@ export class Transaction {
     createdAt: Date;
 
     @ApiProperty()
-    @Column({
-        type: 'enum',
-        enum: OperationType
-      })
-    operationType: OperationType;
-
-    @ApiProperty()
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     amount: number;
 

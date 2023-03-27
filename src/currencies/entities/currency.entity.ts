@@ -17,7 +17,7 @@ export class Currency {
     name: string;
 
     @ApiProperty()
-    @Column()
+    @Column({length: 3 })
     code: string;
 
     @ApiProperty()

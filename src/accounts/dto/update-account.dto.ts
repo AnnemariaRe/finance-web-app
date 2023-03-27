@@ -8,11 +8,7 @@ export class UpdateAccountDto extends PartialType(CreateAccountDto) {
     @ApiProperty({ required: false })
     title: string;
     @ApiProperty({ required: false })
-    balance: number;
-    @ApiProperty({ required: false })
     isActive: boolean;
-    @ApiProperty({ required: false })
-    currency: Currency;
     @ApiProperty({ required: false })
     accountType: AccountType;
 }

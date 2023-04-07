@@ -9,18 +9,11 @@ export class AppController {
   }
   @Get()
   @Render('index')
-  main(@Req() req) {
-    if (req.user) {
-      return {
-        message: 'Main page',
-        showLogoutbutton: true
-      };
-    } else {
+  main() {
       return {
         message: 'Main page',
         showLoginButton: true
-      }
-    }
+      };
   }
 
   @Get('/wallet')

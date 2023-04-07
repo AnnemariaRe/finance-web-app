@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Account } from "src/accounts/entities/account.entity";
 import { Category } from "src/categories/entities/category.entity";
 import { OperationType } from "src/enums/OperationType";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Transaction {
@@ -11,7 +11,7 @@ export class Transaction {
     id: number;
 
     @ApiProperty()
-    @Column()
+    @CreateDateColumn()
     createdAt: Date;
 
     @ApiProperty()

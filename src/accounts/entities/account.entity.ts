@@ -3,7 +3,7 @@ import { Currency } from "src/currencies/entities/currency.entity";
 import { AccountType } from "src/enums/AccountType";
 import { Transaction } from "src/transactions/entities/transaction.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Account {
@@ -12,7 +12,7 @@ export class Account {
     id: number;
 
     @ApiProperty()
-    @Column()
+    @CreateDateColumn()
     createdAt: Date;
 
     @ApiProperty()

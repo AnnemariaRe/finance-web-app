@@ -10,5 +10,5 @@ export class UpdateAccountDto extends PartialType(CreateAccountDto) {
     @ApiProperty({ required: false })
     isActive: boolean;
     @ApiProperty({ required: false })
-    accountType: AccountType;
+    accountType: string;
 }

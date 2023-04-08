@@ -5,4 +5,6 @@ export class CreateAccountDto {
     title: string;
     @ApiProperty()
     accountType: string;
+    @ApiProperty()
+    currency: string;
 }

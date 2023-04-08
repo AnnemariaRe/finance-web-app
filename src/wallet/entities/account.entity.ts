@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Currency } from "src/currencies/entities/currency.entity";
+import { Currency } from "src/wallet/entities/currency.entity";
 import { AccountType } from "src/enums/AccountType";
 import { Transaction } from "src/transactions/entities/transaction.entity";
 import { User } from "src/users/entities/user.entity";

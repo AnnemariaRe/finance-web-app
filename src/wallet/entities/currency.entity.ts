@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Account } from "src/accounts/entities/account.entity";
+import { Account } from "src/wallet/entities/account.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -17,11 +17,11 @@ export class Currency {
     name: string;
 
     @ApiProperty()
-    @Column({length: 3 })
+    @Column({length: 3, nullable: true })
     code: string;
 
     @ApiProperty()
-    @Column({ type: 'char', length: 1 })
+    @Column({ type: 'char' })
     symbol: string;
     
     @ApiProperty({ type: () => Account })

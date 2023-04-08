@@ -9,4 +9,4 @@ export class CreateCurrencyDto {
 
     @ApiProperty()
     symbol: string;
-}
+}  

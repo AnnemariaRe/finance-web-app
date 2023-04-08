@@ -1,4 +1,4 @@
-function onFormSubmit2() {
+function onIncomeFormSubmit() {
     let amount = document.getElementById("income_amount").value;
     let category = document.getElementById("income_category").value;
     let account = document.getElementById("account2").value;

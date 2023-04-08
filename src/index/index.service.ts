@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Account } from 'src/wallet/entities/account.entity';
-import { Category } from 'src/categories/entities/category.entity';
+import { Category } from 'src/index/entities/category.entity';
 import { OperationType } from 'src/enums/OperationType';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';

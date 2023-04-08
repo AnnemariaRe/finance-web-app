@@ -30,7 +30,6 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ResponseTimeInterceptor());
 
-
   await app.listen(process.env.PORT);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }

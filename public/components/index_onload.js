@@ -8,16 +8,6 @@ window.onload = function () {
         document.getElementById("main").innerHTML += generateSubmit(submit_info);
     }
 
-    for (let submit in submits) {
-        if (submit.endsWith("acc")) {
-            let submit_info = JSON.parse(localStorage[submit]);
-            document.getElementById("account1").innerHTML +=
-                "<option>" + submit_info.name + " (" + submit_info.type + ") </option>";
-            document.getElementById("account2").innerHTML +=
-                "<option>" + submit_info.name + " (" + submit_info.type + ") </option>";
-        }
-    }
-
     // getCurrency('https://api.currencyapi.com/v3/latest?apikey=uB9jmOX6xlypRBtHq65elzi5AZAaUI27vSXSniFo&currencies=EUR%2CUSD%2CUAH%2CKZT&base_currency=RUB')
     // .then(response => JSON.parse(response))
     // .then(data => setTimeout(() => { 

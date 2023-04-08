@@ -56,15 +56,9 @@ export class WalletService {
   }
 
   async findAllByUserId(userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts']});
+    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts.transactions']});
     if (user && user.accounts != null) return user.accounts;
   }
-
-  // async findAllActiveByUserId(userId: number) {
-  //   const user = await this.userRepository.findOne({ where: { id: userId } });
-  //   const activeAccounts = user.accounts.filter(account => account.isActive);
-  //   return activeAccounts;
-  // }
 
   // async update(id: number, updateAccountDto: UpdateAccountDto) {
   //   return await this.accountRepository.save({ id, updateAccountDto });

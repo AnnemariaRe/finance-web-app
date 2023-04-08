@@ -3,8 +3,8 @@
     <section class="first-block">
         <div class="heading">
             <h1>WalletKeeper</h1>
-            
         </div>
+
         <div class="buttons">
             <a class="open-button" onclick="document.getElementById('id01').style.display='block'">
                 <i class="fa fa-minus"></i>
@@ -17,28 +17,27 @@
             </a>
 
             <div id="id01" class="modal">
-                <form class="modal-content animate" onsubmit="onFormSubmit1()">
+                <form class="modal-content animate" method="POST" action="/transaction">
                     <div class="container">
                         <label for="expense_amount"><b>Сумма</b></label>
-                        <input type="text" placeholder="Введите потраченную сумму" id="expense_amount" required>
+                        <input type="text" name="amount" placeholder="Введите потраченную сумму" id="expense_amount" required>
 
                         <label for="expense_category"><b>Категория</b></label>
-                        <select id="expense_category">
-                            <option selected>Продукты</option>
-                            <option>Рестораны</option>
-                            <option>Транспорт</option>
-                            <option>Жилье</option>
-                            <option>Медицина</option>
-                            <option>Путешестия</option>
+                        <select id="expense_category" name="category">
+                            {{#each viewData.expenseCategories}}
+                                <option>{{name}}</option> 
+                            {{/each}}
                         </select>
 
                         <label for="account"><b>Счет списания</b></label>
-                        <select id="account1">
-
+                        <select id="account1" name="account">
+                            {{#each viewData.accounts}}
+                                <option>{{title}}</option> 
+                            {{/each}}
                         </select>
 
                         <label for="date"><b>Дата транзакции</b></label><br>
-                        <input type="date" id="today1">
+                        <input type="date" id="today1" name="date">
                         <script>
                             document.getElementById('today1').valueAsDate = new Date();
                         </script> <br>
@@ -52,26 +51,27 @@
             </div>
 
             <div id="id02" class="modal">
-                <form class="modal-content animate" onsubmit="onFormSubmit2()">
+                <form class="modal-content animate" method="POST" action="/transaction">
                     <div class="container">
                         <label for="income_amount"><b>Сумма</b></label>
-                        <input type="text" placeholder="Введите полученную сумму" id="income_amount" required>
+                        <input type="text" name="amount" placeholder="Введите полученную сумму" id="income_amount" required>
 
                         <label for="income_category"><b>Категория</b></label>
-                        <select id="income_category">
-                            <option selected>Зарплата</option>
-                            <option>Стипендия</option>
-                            <option>Подработка</option>
-                            <option>Подарки</option>
+                        <select id="income_category" name="category">
+                            {{#each viewData.incomeCategories}}
+                                <option>{{name}}</option> 
+                            {{/each}}
                         </select>
 
                         <label for="account"><b>Счет зачисления</b></label>
-                        <select id="account2">
-
+                        <select id="account2" name="account">
+                            {{#each viewData.accounts}}
+                                <option>{{title}}</option> 
+                            {{/each}}
                         </select>
 
                         <label for="date"><b>Дата транзакции</b></label><br>
-                        <input type="date" id="today2">
+                        <input type="date" id="today2" name="date">
                         <script>
                             document.getElementById('today2').valueAsDate = new Date();
                         </script> <br>

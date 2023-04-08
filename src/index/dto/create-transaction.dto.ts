@@ -5,4 +5,8 @@ export class CreateTransactionDto {
     amount: number;
     @ApiProperty()
     date: Date;
+    @ApiProperty()
+    account: string;
+    @ApiProperty()
+    category: string;
 }

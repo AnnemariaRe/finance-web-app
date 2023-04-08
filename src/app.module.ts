@@ -4,23 +4,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service'; 
 import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { UsersModule } from './users/users.module';
-import { TransactionsModule } from './transactions/transactions.module';
 import { CategoriesModule } from './categories/categories.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Transaction } from './transactions/entities/transaction.entity';
+import { Transaction } from './index/entities/transaction.entity';
 import { User } from './users/entities/user.entity';
 import { Account } from './wallet/entities/account.entity';
 import { Category } from './categories/entities/category.entity';
 import { Currency } from './wallet/entities/currency.entity';
 import { AccountType } from './enums/AccountType';
 import { WalletModule } from './wallet/wallet.module';
+import { IndexModule } from './index/index.module';
 
 @Module({
   controllers: [AppController],
   providers: [AppService, {
       provide: APP_INTERCEPTOR,
       useClass: ResponseTimeInterceptor}],
-  imports: [UsersModule, TransactionsModule, CategoriesModule, WalletModule,
+  imports: [UsersModule, IndexModule, CategoriesModule, WalletModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cg31sbseoogop1850im0-a.frankfurt-postgres.render.com',

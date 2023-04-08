@@ -6,7 +6,7 @@ export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {
     @ApiProperty({ required: false })
     amount: number;
     @ApiProperty({ required: false })
-    category: Category;
+    category: string;
     @ApiProperty({ required: false })
     date: Date;
 }

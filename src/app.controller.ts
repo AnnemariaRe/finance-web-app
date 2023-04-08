@@ -7,20 +7,20 @@ export class AppController {
   getHello(): any {
     throw new Error('Method not implemented.');
   }
-  @Get()
-  @Render('index')
-  main() {
-      return {
-        message: 'Main page',
-        showLoginButton: true
-      };
-  }
+  // @Get()
+  // @Render('index')
+  // main() {
+  //     return {
+  //       message: 'Main page',
+  //       showLoginButton: true
+  //     };
+  // }
 
-  @Get('/wallet')
-  @Render('wallet')
-  wallet() {
-    return { message: 'Wallet page' };
-  }
+  // @Get('/wallet')
+  // @Render('wallet')
+  // wallet() {
+  //   return { message: 'Wallet page' };
+  // }
 
   @Get('/history')
   @Render('history')

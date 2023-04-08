@@ -53,4 +53,21 @@ export default class IndexService {
     return user.categories;
   }
 
+  async findAllTransactionsByUserId(userId: number) {
+    const user = await this.userRepository.findOne({ 
+      where: { id: userId }, 
+      relations: ['accounts.transactions.category', 'accounts.transactions.account.currency']
+    });
+    if (user && user.accounts != null) {
+      const transactions = user.accounts.reduce((acc, account) => {
+        if (account.transactions != null) {
+          acc.push(...account.transactions);
+        }
+        return acc;
+      }, []);
+
+      return transactions;
+    }
+  }
+
 }

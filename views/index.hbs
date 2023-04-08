@@ -181,6 +181,14 @@
                     </tr>
                 </thead>
                 <tbody id="main">
+                    {{#each viewData.transactions}}
+                        <tr>
+                            <td>{{category.name}}</td>
+                            <td>{{amount}} {{account.currency.symbol}}</td>
+                            <td>{{account.title}}</td>
+                            <td>{{date}}</td>
+                        </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </section>

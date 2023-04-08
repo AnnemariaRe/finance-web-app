@@ -19,7 +19,7 @@ export class Transaction {
     amount: number;
 
     @ApiProperty()
-    @Column()
+    @Column({ type: 'date' })
     date: Date;
     
     @ApiProperty({ type: () => Account })

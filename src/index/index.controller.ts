@@ -32,7 +32,8 @@ export class IndexController {
     const categories = await this.indexService.findCategoriesByUserId(1);
     viewData['expenseCategories'] = categories.filter(category => category.operationType === OperationType.EXPENSE);
     viewData['incomeCategories'] = categories.filter(category => category.operationType === OperationType.INCOME);
-
+    viewData['transactions'] = await this.indexService.findAllTransactionsByUserId(1);
+    
     return { viewData: viewData };
   }
 }

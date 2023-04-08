@@ -18,10 +18,13 @@ export class WalletController {
     const accounts = await this.walletService.findAllByUserId(1);
 
     const accountsWithTotalAmount = accounts.map(account => {
+      let totalAmount = 0;
       if (account.transactions != null) {
-        const totalAmount = account.transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
-      }
-      const totalAmount = 0;
+        for (const transaction of account.transactions) {
+          totalAmount += Number(transaction.amount); 
+        }
+      } 
+      
       return { ...account, totalAmount };
     });
     viewData['accounts'] = accountsWithTotalAmount;
@@ -41,39 +44,4 @@ export class WalletController {
 
     return response.redirect('/wallet');
   }
-
-  // @ApiOperation({summary: 'Get account'})
-  // @Get(':id')
-  // @ApiOkResponse({ type: Account })
-  // async findOne(@Param('id') id: string) : Promise<Account> {
-  //   return await this.accountsService.findOne(+id);
-  // }
-
-  // @ApiOperation({summary: 'Get all user accounts'})
-  // @Get(':userId')
-  // @ApiOkResponse({ type: Account, isArray: true })
-  // async findAllByUserId(@Param('userId') userId: string) : Promise<Account[]> {
-  //   return this.accountsService.findAllByUserId(+userId);
-  // }
-
-  // @ApiOperation({summary: 'Get all user active accounts'})
-  // @Get('active/:userId')
-  // @ApiOkResponse({ type: Account, isArray: true })
-  // async findAllActiveByUserId(@Param('userId') userId: string) : Promise<Account[]> {
-  //   return this.accountsService.findAllActiveByUserId(+userId);
-  // }
-
-  // @ApiOperation({summary: 'Edit account info'})
-  // @Patch(':id')
-  // @ApiOkResponse({ type: Account })
-  // async update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) : Promise<Account> {
-  //   return await this.accountsService.update(+id, updateAccountDto);
-  // }
-
-  // @ApiOperation({summary: 'Delete account'})
-  // @Delete(':id')
-  // @ApiOkResponse({ type: Account })
-  // async remove(@Param('id') id: string) {
-  //   return await this.accountsService.remove(+id);
-  // }
 }

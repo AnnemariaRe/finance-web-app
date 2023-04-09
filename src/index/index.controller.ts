@@ -9,7 +9,7 @@ import CategoriesService from 'src/services/categories.service';
 const axios = require('axios');
 
 @Controller('')
-@ApiTags('transaction')
+@ApiTags('index page')
 export class IndexController {
   constructor(private readonly accountsService: AccountsService,
     private readonly categoriesService: CategoriesService,
@@ -29,10 +29,10 @@ export class IndexController {
     return response.redirect('/');
   }
 
-  @ApiOperation({summary: 'Get transaction'})
+  @ApiOperation({summary: 'Get transactions'})
   @Get('/')
   @Render('index')
-  async findOne() {
+  async getTransactions() {
     const viewData = [];
     viewData['accounts'] = await this.accountsService.findAllActiveByUserId(1);
     const categories = await this.categoriesService.findCategoriesByUserId(1);

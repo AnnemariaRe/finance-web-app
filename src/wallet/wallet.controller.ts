@@ -6,7 +6,7 @@ import { CurrenciesService } from 'src/services/currencies.service';
 import { CreateAccountDto } from '../dto/create-account.dto';
 
 @Controller('wallet')
-@ApiTags('account')
+@ApiTags('wallet page')
 export class WalletController {
   constructor(private readonly accountsService: AccountsService,
     private readonly currenciesService: CurrenciesService) {}

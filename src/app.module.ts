@@ -10,16 +10,16 @@ import { User } from './users/entities/user.entity';
 import { Account } from './entities/account.entity';
 import { Category } from './entities/category.entity';
 import { Currency } from './entities/currency.entity';
-import { AccountType } from './enums/AccountType';
 import { WalletModule } from './wallet/wallet.module';
 import { IndexModule } from './index/index.module';
+import { HistoryModule } from './history/history.module';
 
 @Module({
   controllers: [AppController],
   providers: [AppService, {
       provide: APP_INTERCEPTOR,
       useClass: ResponseTimeInterceptor}],
-  imports: [UsersModule, IndexModule, WalletModule,
+  imports: [UsersModule, IndexModule, WalletModule, HistoryModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cg31sbseoogop1850im0-a.frankfurt-postgres.render.com',

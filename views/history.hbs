@@ -12,6 +12,14 @@
                     </tr>
                 </thead>
                 <tbody id="main">
+                    {{#each viewData.transactions}}
+                        <tr>
+                            <td>{{category.name}}</td>
+                            <td>{{amount}} {{account.currency.symbol}}</td>
+                            <td>{{account.title}}</td>
+                            <td>{{date}}</td>
+                        </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </section>
@@ -22,8 +30,6 @@
                 <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 
                 <script>
-                    const submits = { ...localStorage };
-                    var data = Array(6).fill(0);
                     var colors = ["#e9f5db", "#cfe1b9", "#b5c99a", "#97a97c", "#588157",
                         "#718355", "#31572c"]
 
@@ -36,44 +42,25 @@
                         }
                         return random;
                     }
-                    for (let submit in submits) {
-                        if (submit.endsWith("acc")) { continue; }
-                        submit_info = JSON.parse(localStorage[submit]);
-                        if (submit_info.check == "+") { continue; }
 
-                        switch (submit_info.category) {
-                            case "Продукты":
-                                data[0] += Number(submit_info.amount);
-                                break;
-                            case "Рестораны":
-                                data[1] += Number(submit_info.amount);
-                                break;
-                            case "Транспорт":
-                                data[2] += Number(submit_info.amount);
-                                break;
-                            case "Жилье":
-                                data[3] += Number(submit_info.amount);
-                                break;
-                            case "Медицина":
-                                data[4] += Number(submit_info.amount);
-                                break;
-                            case "Путешествия":
-                                data[5] += Number(submit_info.amount);
-                                break;
-                            default:
-                                break;
-                        }
+                    var xValues = [];
+                    var yValues = [];
+                    for (let i = 0; i < {{viewData.expenseLength}}; i++) {
+                        {{#each viewData.expense_xValues}}
+                            xValues[i] = "{{this}}"
+                        {{/each}}
+                        {{#each viewData.expense_yValues}}
+                            yValues[i] = "{{this}}"
+                        {{/each}}
                     }
-
-                    var xValues = ["Продукты", "Рестораны", "Транспорт", "Жилье", "Медицина", "Путешествия"];
 
                     new Chart("myChart", {
                         type: "pie",
                         data: {
                             labels: xValues,
                             datasets: [{
-                                backgroundColor: generateRandomColor(colors, 5),
-                                data: data
+                                backgroundColor: generateRandomColor(colors, {{viewData.expenseLength}}),
+                                data: yValues
                             }]
                         },
                         options: {
@@ -90,7 +77,6 @@
                 <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
 
                 <script>
-                    var data = Array(5).fill(0);
                     var colors = ["#f9dc5c", "#fae588", "#fcefb4", "#f9dc5c", "#cca000"]
 
                     function generateRandomColor(colors, n) {
@@ -103,38 +89,24 @@
                         return random;
                     }
 
-                    for (let submit in submits) {
-                        if (submit.endsWith("acc")) { continue; }
-                        submit_info = JSON.parse(localStorage[submit]);
-                        if (submit_info.check == "-") { continue; }
-
-                        switch (submit_info.category) {
-                            case "Зарплата":
-                                data[0] += Number(submit_info.amount);
-                                break;
-                            case "Подработка":
-                                data[1] += Number(submit_info.amount);
-                                break;
-                            case "Подарки":
-                                data[2] += Number(submit_info.amount);
-                                break;
-                            case "Стипендия":
-                                data[3] += Number(submit_info.amount);
-                                break;
-                            default:
-                                break;
-                        }
+                    var xValues = [];
+                    var yValues = [];
+                    for (let i = 0; i < {{viewData.incomeLength}}; i++) {
+                        {{#each viewData.income_xValues}}
+                            xValues[i] = "{{this}}"
+                        {{/each}}
+                        {{#each viewData.income_yValues}}
+                            yValues[i] = "{{this}}"
+                        {{/each}}
                     }
-
-                    var xValues = ["Зарплата", "Подработка", "Подарки", "Стипендия"];
 
                     new Chart("myChart2", {
                         type: "pie",
                         data: {
                             labels: xValues,
                             datasets: [{
-                                backgroundColor: generateRandomColor(colors, 4),
-                                data: data
+                                backgroundColor: generateRandomColor(colors, {{viewData.incomeLength}}),
+                                data: yValues
                             }]
                         },
                         options: {

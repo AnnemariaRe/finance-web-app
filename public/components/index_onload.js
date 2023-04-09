@@ -41,20 +41,6 @@ window.onload = function () {
     });
 }
 
-function generateSubmit(submit_info) {
-    var tr = "<tr>";
-    tr += "<td>" + submit_info.category + "</td>";
-    if (submit_info.check == "+") {
-        tr += "<td>+" + submit_info.amount + "</td>";
-    } else {
-        tr += "<td>-" + submit_info.amount + "</td>";
-    }
-    tr += "<td>" + submit_info.account + "</td>";
-    tr += "<td>" + submit_info.date + "</td></tr>";
-
-    return tr;
-}
-
 function getCurrency(url) {
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();

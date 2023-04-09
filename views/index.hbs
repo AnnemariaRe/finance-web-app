@@ -103,13 +103,13 @@
     <section class="second-block">
         <section class="balance-all">
             <div class="balance-item">
-                <h4>Всего средств: 124,000 ₽</h4>
+                <h4>Всего средств: {{viewData.totalAmount}} ₽</h4>
             </div>
             <div class="balance-item">
-                <h4>Доступно сейчас: 68,000 ₽</h4>
+                <h4>Доступно сейчас: {{viewData.availableNow}} ₽</h4>
             </div>
             <div class="balance-item">
-                <h4>Сбережения: 56,000 ₽</h4>
+                <h4>Сбережения: {{viewData.totalSavings}} ₽</h4>
             </div>
         </section>
 
@@ -208,10 +208,10 @@
             </div>
 
             <div class="month-balance-item">
-                <h4>расход за месяц: 31000 ₽</h4>
+                <h4>расход за месяц: {{viewData.monthExpense}} ₽</h4>
             </div>
             <div class="month-balance-item">
-                <h4>доход за месяц: 50000 ₽</h4>
+                <h4>доход за месяц: {{viewData.monthIncome}} ₽</h4>
             </div>
         </section>
     </section>

@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Account } from 'src/wallet/entities/account.entity';
-import { Category } from 'src/index/entities/category.entity';
+import { Account } from 'src/entities/account.entity';
+import { Category } from 'src/entities/category.entity';
 import { OperationType } from 'src/enums/OperationType';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
-import { Transaction } from './entities/transaction.entity';
+import { Transaction } from 'src/entities/transaction.entity';
+import { CreateTransactionDto } from 'src/dto/create-transaction.dto';
 
 @Injectable()
-export default class IndexService {
+export default class TransactionsService {
   constructor(
     @InjectRepository(Transaction)
     private readonly transactionRepository: Repository<Transaction>,
@@ -43,16 +42,6 @@ export default class IndexService {
     return transaction;
   }
 
-  async findAllActiveByUserId(userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts'] });
-    return user.accounts;
-  }
-
-  async findCategoriesByUserId(userId: number) {
-    const user  = await this.userRepository.findOne({ where: { id: userId }, relations: ['categories']});
-    return user.categories;
-  }
-
   async findAllTransactionsByUserId(userId: number) {
     const user = await this.userRepository.findOne({ 
       where: { id: userId }, 
@@ -69,5 +58,4 @@ export default class IndexService {
       return transactions;
     }
   }
-
 }

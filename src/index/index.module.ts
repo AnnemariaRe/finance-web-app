@@ -1,15 +1,17 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { Transaction } from './entities/transaction.entity';
+import { Transaction } from '../entities/transaction.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Account } from 'src/wallet/entities/account.entity';
-import { Category } from 'src/index/entities/category.entity';
+import { Account } from 'src/entities/account.entity';
+import { Category } from 'src/entities/category.entity';
 import { User } from 'src/users/entities/user.entity';
 import { IndexController } from './index.controller';
-import IndexService from './index.service';
+import AccountsService from 'src/services/accounts.service';
+import CategoriesService from 'src/services/categories.service';
+import TransactionsService from 'src/services/transactions.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Transaction, Account, Category, User])],
   controllers: [IndexController],
-  providers: [IndexService]
+  providers: [AccountsService, CategoriesService, TransactionsService]
 })
 export class IndexModule {}

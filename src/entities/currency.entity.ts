@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Account } from "src/wallet/entities/account.entity";
+import { Account } from "src/entities/account.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

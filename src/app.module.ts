@@ -5,11 +5,11 @@ import { AppService } from './app.service';
 import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Transaction } from './index/entities/transaction.entity';
+import { Transaction } from './entities/transaction.entity';
 import { User } from './users/entities/user.entity';
-import { Account } from './wallet/entities/account.entity';
-import { Category } from './index/entities/category.entity';
-import { Currency } from './wallet/entities/currency.entity';
+import { Account } from './entities/account.entity';
+import { Category } from './entities/category.entity';
+import { Currency } from './entities/currency.entity';
 import { AccountType } from './enums/AccountType';
 import { WalletModule } from './wallet/wallet.module';
 import { IndexModule } from './index/index.module';
@@ -36,6 +36,4 @@ import { IndexModule } from './index/index.module';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
   }
-
-  public static AccountType = AccountType;
 }

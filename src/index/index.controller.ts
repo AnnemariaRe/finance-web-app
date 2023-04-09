@@ -1,15 +1,19 @@
 import { Controller, Get, Post, Body, Res, Render } from '@nestjs/common';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { CreateTransactionDto } from '../dto/create-transaction.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { OperationType } from 'src/enums/OperationType';
-import IndexService from './index.service';
 import { AccountType } from 'src/enums/AccountType';
+import TransactionsService from 'src/services/transactions.service';
+import AccountsService from 'src/services/accounts.service';
+import CategoriesService from 'src/services/categories.service';
 const axios = require('axios');
 
 @Controller('')
 @ApiTags('transaction')
 export class IndexController {
-  constructor(private readonly indexService: IndexService) {}
+  constructor(private readonly accountsService: AccountsService,
+    private readonly categoriesService: CategoriesService,
+    private readonly transactionsService: TransactionsService) {}
 
   @ApiOperation({summary: 'Create transaction'})
   @Post('/transaction')
@@ -20,7 +24,7 @@ export class IndexController {
     transactionDto.account = body.account;
     transactionDto.category = body.category;
 
-    await this.indexService.create(1, transactionDto);
+    await this.transactionsService.create(1, transactionDto);
 
     return response.redirect('/');
   }
@@ -30,11 +34,11 @@ export class IndexController {
   @Render('index')
   async findOne() {
     const viewData = [];
-    viewData['accounts'] = await this.indexService.findAllActiveByUserId(1);
-    const categories = await this.indexService.findCategoriesByUserId(1);
+    viewData['accounts'] = await this.accountsService.findAllActiveByUserId(1);
+    const categories = await this.categoriesService.findCategoriesByUserId(1);
     viewData['expenseCategories'] = categories.filter(category => category.operationType === OperationType.EXPENSE);
     viewData['incomeCategories'] = categories.filter(category => category.operationType === OperationType.INCOME);
-    const transactions = await this.indexService.findAllTransactionsByUserId(1);
+    const transactions = await this.transactionsService.findAllTransactionsByUserId(1);
     viewData['transactions'] = transactions;
     
     const apiKey = 'uB9jmOX6xlypRBtHq65elzi5AZAaUI27vSXSniFo';

@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { Category } from 'src/index/entities/category.entity';
+import { Category } from 'src/entities/category.entity';
 import { CreateTransactionDto } from './create-transaction.dto';
 
 export class UpdateTransactionDto extends PartialType(CreateTransactionDto) {

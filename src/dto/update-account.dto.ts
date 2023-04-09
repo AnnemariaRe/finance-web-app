@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import Decimal from 'decimal.js';
-import { Currency } from 'src/wallet/entities/currency.entity';
+import { Currency } from 'src/entities/currency.entity';
 import { AccountType } from 'src/enums/AccountType';
 import { CreateAccountDto } from './create-account.dto';
 

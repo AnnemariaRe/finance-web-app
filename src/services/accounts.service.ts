@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Currency } from 'src/wallet/entities/currency.entity';
+import { Account } from 'src/entities/account.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
-import { Account } from './entities/account.entity';
-import { CreateAccountDto } from './dto/create-account.dto';
+import { CreateAccountDto } from 'src/dto/create-account.dto';
+import { Currency } from 'src/entities/currency.entity';
 import { AccountType } from 'src/enums/AccountType';
 
 @Injectable()
-export class WalletService {
+export default class AccountsService {
   constructor(
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
@@ -51,20 +51,13 @@ export class WalletService {
     return account;
   }
 
-  async findAll(): Promise<Currency[]> {
-    return await this.currencyRepository.find();
+  async findAllActiveByUserId(userId: number) {
+    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts'] });
+    return user.accounts;
   }
 
   async findAllByUserId(userId: number) {
     const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts.transactions']});
     if (user && user.accounts != null) return user.accounts;
   }
-
-  // async update(id: number, updateAccountDto: UpdateAccountDto) {
-  //   return await this.accountRepository.save({ id, updateAccountDto });
-  // }
-
-  // async remove(id: number) {
-  //   return await this.accountRepository.delete(id);
-  // }
 }

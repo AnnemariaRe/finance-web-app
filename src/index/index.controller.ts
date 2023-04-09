@@ -45,6 +45,25 @@ export class IndexController {
     let monthIncome = 0;
     const now = new Date();
 
+    var data = Array(31).fill(0);
+    var xValues = [];
+
+    var today = Number(String(now.getDate()).padStart(2, '0'));
+    var month = String(now.getMonth() + 1).padStart(2, '0');
+
+    if (today > 10) {
+        var start = today - 9;
+        var start2 = today - 9;
+    } else {
+        var start = 1;
+        var start2 = 1;
+    }
+
+    for (let i = 0; i < 10; i++) {
+        xValues[i] = start;
+        start++;
+    }
+
     for (const transaction of transactions) {
       const currency = transaction.account.currency.code;
 
@@ -65,18 +84,26 @@ export class IndexController {
 
       if (transaction.date.substring(0, 4) == now.toLocaleDateString().substring(4, 8) &&
           transaction.date.substring(6, 7) == now.toLocaleDateString().substring(0, 1)) {
-            if (transaction.category.operationType == OperationType.EXPENSE) {
-              monthExpense += Number(amountInRUB);
-            } else {
-              monthIncome += Number(amountInRUB);
+          if (transaction.category.operationType == OperationType.EXPENSE) {
+            monthExpense += Number(-amountInRUB);
+
+            var day = Number(transaction.date.split('-')[2]);
+            if (transaction.date.split('-')[1] == month && day > today - 9) {
+                data[day] += Number(-transaction.amount);
             }
+          } else {
+            monthIncome += Number(amountInRUB);
           }
+      }
     }
     viewData['totalAmount'] = totalAmount.toFixed(2);
     viewData['totalSavings'] = totalSavings.toFixed(2);
     viewData['availableNow'] = (totalAmount - totalSavings).toFixed(2);
     viewData['monthExpense'] = monthExpense.toFixed(2);
     viewData['monthIncome'] = monthIncome.toFixed(2);
+
+    viewData['dayValues'] = xValues;
+    viewData['chartData'] = data.slice(start2, start2 + 10);
 
     return { viewData: viewData };
   }

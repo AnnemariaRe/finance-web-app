@@ -116,55 +116,22 @@
         <section class="graph-expense">
             <h3>Траты последние 10 дней</h3>
             <div style="max-width:650px"><canvas id="expenses_chart"></canvas></div>
-
             <script>
-                const submits = { ...localStorage };
-                var data = Array(31).fill(0);
-                var colors = [];
-                var xValues = [];
-
-                var now = new Date();
-                var today = String(now.getDate()).padStart(2, '0');
-                var month = String(now.getMonth() + 1).padStart(2, '0');
-
-                if (today > 10) {
-                    var start = today - 9;
-                    var start2 = today - 9;
-                } else {
-                    var start = 1;
-                    var start2 = 1;
-                }
-
-                for (let i = 0; i < 10; i++) {
-                    xValues[i] = start;
-                    start++;
-                    colors[i] = "#C5CEB6";
-                }
-
-                for (let submit in submits) {
-                    if (submit.endsWith("acc")) { continue; }
-                    submit_info = JSON.parse(localStorage[submit]);
-                    if (submit_info.check == "+") { continue; }
-
-                    var day = Number(submit_info.date.split('-')[2]);
-                    if (submit_info.date.split('-')[1] == month && day > today - 9) {
-                        data[day] += Number(submit_info.amount);
-                    }
-                }
-
                 new Chart("expenses_chart", {
                     type: "bar",
                     data: {
-                        labels: xValues,
+                        labels: [{{viewData.dayValues}}],
                         datasets: [{
-                            backgroundColor: colors,
-                            data: data.slice(start2, start2 + 10)
+                        backgroundColor: ['#C5CEB6', '#C5CEB6', '#C5CEB6', '#C5CEB6',
+                                            '#C5CEB6', '#C5CEB6', '#C5CEB6', '#C5CEB6',
+                                            '#C5CEB6', '#C5CEB6'],
+                        data: [{{viewData.chartData}}]
                         }]
                     },
                     options: {
-                        legend: { display: false },
+                        legend: {display: false},
                     }
-                });
+                    });
             </script>
         </section>
     </section>

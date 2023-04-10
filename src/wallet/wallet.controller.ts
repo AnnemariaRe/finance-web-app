@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Post, Render, Res } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Post, Render, Res, UseFilters } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Account } from 'src/entities/account.entity';
 import { AccountType } from 'src/enums/AccountType';
+import { HttpExceptionFilter } from 'src/http-exception.filter';
 import AccountsService from 'src/services/accounts.service';
 import { CurrenciesService } from 'src/services/currencies.service';
 import { CreateAccountDto } from '../dto/create-account.dto';
@@ -12,6 +14,7 @@ export class WalletController {
     private readonly currenciesService: CurrenciesService) {}
 
   @Get('/')
+  @UseFilters(new HttpExceptionFilter())
   @Render('wallet')
   async getAccounts() {
     const viewData = [];
@@ -34,8 +37,8 @@ export class WalletController {
     return { viewData: viewData };
   }
   
-  @ApiOperation({summary: 'Create account'})
   @Post('/account')
+  @UseFilters(new HttpExceptionFilter())
   async create(@Body() body, @Res() response) {
     const accountDto = new CreateAccountDto;
     accountDto.title = body.name;

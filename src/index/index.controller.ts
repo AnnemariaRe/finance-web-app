@@ -15,7 +15,6 @@ export class IndexController {
     private readonly categoriesService: CategoriesService,
     private readonly transactionsService: TransactionsService) {}
 
-  @ApiOperation({summary: 'Create transaction'})
   @Post('/transaction')
   async create(@Body() body, @Res() response) {
     const transactionDto = new CreateTransactionDto;
@@ -29,7 +28,6 @@ export class IndexController {
     return response.redirect('/');
   }
 
-  @ApiOperation({summary: 'Get transactions'})
   @Get('/')
   @Render('index')
   async getTransactions() {
@@ -86,8 +84,7 @@ export class IndexController {
         totalSavings += Number(amountInRUB);
       }
 
-      if (transaction.date.substring(0, 4) == now.toLocaleDateString().substring(4, 8) &&
-          transaction.date.substring(6, 7) == now.toLocaleDateString().substring(0, 1)) {
+      if (transaction.date.substring(5, 7) == month) {
           if (transaction.category.operationType == OperationType.EXPENSE) {
             monthExpense += Number(-amountInRUB);
 

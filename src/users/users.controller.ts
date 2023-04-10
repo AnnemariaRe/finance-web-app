@@ -9,14 +9,12 @@ import { User } from '../entities/user.entity';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiOperation({summary: 'Create user'})
   @Post()
   @ApiCreatedResponse({ type: User })
   async create(@Body() createUserDto: CreateUserDto) : Promise<User> {
     return await this.usersService.create(createUserDto);
   }
 
-  @ApiOperation({summary: 'Get user'})
   @Get(':id')
   @ApiOkResponse({ type: User })
   async findOne(@Param('id') id: string) : Promise<User> {

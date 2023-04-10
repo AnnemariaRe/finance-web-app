@@ -5,7 +5,8 @@ import { AppModule } from './app.module';
 import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import hbs = require('hbs');
-import { ValidationPipe } from '@nestjs/common';
+import { ExceptionFilter, ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -15,16 +16,13 @@ async function bootstrap() {
     .setTitle('WalletKeeper Web App')
     .setDescription('The API description')
     .setVersion('1.0')
-    .addTag('user')
-    .addTag('account')
-    .addTag('transaction')
-    .addTag('category')
-    .addTag('currency')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalFilters(new HttpExceptionFilter());
+
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');

@@ -1,11 +1,4 @@
 window.onload = function () {
-    const submits = { ...localStorage };
-
-    for (let submit in submits) {
-        if (submit.endsWith("acc")) { continue; }
-        let submit_info = JSON.parse(localStorage[submit]);
-    }
-
     $(document).ready( function () {
         $('#history2').DataTable( {
             searching: true,

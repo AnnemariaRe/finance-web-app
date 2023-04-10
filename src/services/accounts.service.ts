@@ -57,7 +57,7 @@ export default class AccountsService {
   }
 
   async findAllByUserId(userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts.transactions']});
+    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['accounts.transactions', 'accounts.currency']});
     if (user && user.accounts != null) return user.accounts;
   }
 }

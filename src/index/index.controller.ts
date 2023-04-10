@@ -37,7 +37,7 @@ export class IndexController {
     viewData['expenseCategories'] = categories.filter(category => category.operationType === OperationType.EXPENSE);
     viewData['incomeCategories'] = categories.filter(category => category.operationType === OperationType.INCOME);
     const transactions = await this.transactionsService.findAllTransactionsByUserId(1);
-    viewData['transactions'] = transactions;
+    viewData['transactions'] = transactions.reverse();
     
     const apiKey = 'uB9jmOX6xlypRBtHq65elzi5AZAaUI27vSXSniFo';
     let amountInRUB = 0;
@@ -106,6 +106,6 @@ export class IndexController {
     viewData['dayValues'] = xValues;
     viewData['chartData'] = data.slice(start2, start2 + 10);
 
-    return { viewData: viewData };
+    return { viewData: viewData, showLoginbutton: true };
   }
 }

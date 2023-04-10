@@ -14,7 +14,7 @@ export class HistoryController {
   async getTransactions() {
     const viewData = [];
     const transactions = await this.transactionsService.findAllTransactionsByUserId(1);
-    viewData['transactions'] = transactions;
+    viewData['transactions'] = transactions.reverse();
     
     const expensesByCategory = {};
     const incomesByCategory = {};      

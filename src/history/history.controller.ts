@@ -33,8 +33,7 @@ export class HistoryController {
         amountInRUB = transaction.amount;
       }
 
-      if (transaction.date.substring(0, 4) == now.toLocaleDateString().substring(4, 8) &&
-          transaction.date.substring(6, 7) == now.toLocaleDateString().substring(0, 1)) {
+      if (transaction.date.substring(5, 7) == String(now.getMonth() + 1).padStart(2, '0')) {
         
         const category = transaction.category.name; 
         if (transaction.category.operationType == OperationType.EXPENSE) {

@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Currency } from "src/entities/currency.entity";
 import { AccountType } from "src/enums/AccountType";
 import { Transaction } from "src/entities/transaction.entity";
-import { User } from "src/users/entities/user.entity";
+import { User } from "src/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

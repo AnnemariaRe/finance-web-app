@@ -3,7 +3,7 @@ import { Transaction } from '../entities/transaction.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Account } from 'src/entities/account.entity';
 import { Category } from 'src/entities/category.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/entities/user.entity';
 import { IndexController } from './index.controller';
 import AccountsService from 'src/services/accounts.service';
 import CategoriesService from 'src/services/categories.service';

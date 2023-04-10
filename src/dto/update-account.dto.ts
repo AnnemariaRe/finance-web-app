@@ -1,14 +1,16 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import Decimal from 'decimal.js';
-import { Currency } from 'src/entities/currency.entity';
-import { AccountType } from 'src/enums/AccountType';
+import { IsBoolean, IsOptional } from 'class-validator';
 import { CreateAccountDto } from './create-account.dto';
 
 export class UpdateAccountDto extends PartialType(CreateAccountDto) {
     @ApiProperty({ required: false })
+    @IsOptional()
     title: string;
     @ApiProperty({ required: false })
+    @IsOptional()
+    @IsBoolean()
     isActive: boolean;
     @ApiProperty({ required: false })
+    @IsOptional()
     accountType: string;
 }

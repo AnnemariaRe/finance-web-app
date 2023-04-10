@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Account } from 'src/entities/account.entity';
 import { Category } from 'src/entities/category.entity';
 import { OperationType } from 'src/enums/OperationType';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Transaction } from 'src/entities/transaction.entity';
 import { CreateTransactionDto } from 'src/dto/create-transaction.dto';

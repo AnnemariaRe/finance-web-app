@@ -6,7 +6,7 @@ import { ResponseTimeInterceptor } from './response-time.interceptor';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Transaction } from './entities/transaction.entity';
-import { User } from './users/entities/user.entity';
+import { User } from './entities/user.entity';
 import { Account } from './entities/account.entity';
 import { Category } from './entities/category.entity';
 import { Currency } from './entities/currency.entity';
